@@ -12,8 +12,7 @@ exports.up = async (knex) => {
         table.string("address").notNullable()
         table.text("description").notNullable()
         table.integer("environment").unsigned()
-        table.integer("minimum-age")
-        // average rating??
+        table.integer("minimumAge")
         table.string("imageUrl").defaultTo("https://images.unsplash.com/photo-1565127803082-69dd82351360?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1742&q=80")
         table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
         table.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())

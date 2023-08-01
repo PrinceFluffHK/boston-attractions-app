@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { Site } from "../../"
+import SiteTile from "./SiteTile";
 
 const SiteList = props => {
     const [siteList, setSiteList] = useState([])
@@ -13,7 +13,6 @@ const SiteList = props => {
                 throw(error) 
             }
             const responseBody = await response.json()
-            console.log(responseBody)
             setSiteList(responseBody.siteList)
         } catch (error) {
             // res.status(500).json({ errors: error })
@@ -25,9 +24,25 @@ const SiteList = props => {
         getSites()
     }, [])
 
+    const sitesToRender = siteList.map(site => {
+        return <SiteTile
+        key={site.id}
+        name={site.name}
+        address={site.address}
+        description={site.description}
+        environment={site.environment}
+        minimumAge={site.minimumAge}
+        />
+    })
+
     return(
+        <div>
         <h1>Welcome to Boston!</h1>
-        // <div>Hello from SiteList</div>
+        <ul>
+        {sitesToRender}
+        </ul>
+        </div>
+
     )
 }
 
