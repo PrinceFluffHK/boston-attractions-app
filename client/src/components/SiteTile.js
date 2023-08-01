@@ -4,28 +4,27 @@ const SiteTile = ({ name, address, description, environment, minimumAge }) => {
     return(
         <>
             <h2>
-            {name}
+                {name}
             </h2>
 
             <h3>
-            {address}
+                {address}
             </h3>
 
             <p>
-            {description}
+                {description}
             </p>
 
             <ul>
-            <li>
-            Setting: {environment}
-            </li>
+                <li>
+                    Setting: {environment}
+                </li>
 
-            <li>
-            Minimum Age: {minimumAge}
-            </li>
+                <li>
+                    Minimum Age: {minimumAge}
+                </li>
             
             </ul>
-
         </>
     )
 }

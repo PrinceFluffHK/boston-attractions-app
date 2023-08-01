@@ -15,7 +15,6 @@ const SiteList = props => {
             const responseBody = await response.json()
             setSiteList(responseBody.siteList)
         } catch (error) {
-            // res.status(500).json({ errors: error })
             console.error(`Error in Fetch: ${error.message}`)
         }
     }
@@ -25,22 +24,24 @@ const SiteList = props => {
     }, [])
 
     const sitesToRender = siteList.map(site => {
-        return <SiteTile
-        key={site.id}
-        name={site.name}
-        address={site.address}
-        description={site.description}
-        environment={site.environment}
-        minimumAge={site.minimumAge}
-        />
+        return(
+            <SiteTile
+                key={site.id}
+                name={site.name}
+                address={site.address}
+                description={site.description}
+                environment={site.environment}
+                minimumAge={site.minimumAge}
+            />
+        )
     })
 
     return(
         <div>
-        <h1>Welcome to Boston!</h1>
-        <ul>
-        {sitesToRender}
-        </ul>
+            <h1>Welcome to Boston!</h1>
+            <ul>
+                {sitesToRender}
+            </ul>
         </div>
 
     )
