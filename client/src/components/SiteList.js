@@ -31,7 +31,7 @@ const SiteList = props => {
                     name={site.name}
                     address={site.address}
                     description={site.description}
-                    environment={site.environment}
+                    environment={site.setting}
                     minimumAge={site.minimumAge}
                 />
             </li>
