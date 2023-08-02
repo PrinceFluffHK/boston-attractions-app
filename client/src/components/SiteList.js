@@ -25,7 +25,7 @@ const SiteList = props => {
 
     const sitesToRender = siteList.map(site => {
         return(
-            <li>
+            <li key={site.id}>
                 <SiteTile
                     key={site.id}
                     name={site.name}
@@ -39,13 +39,12 @@ const SiteList = props => {
     })
 
     return(
-        <div>
+        <>
             <h1>Welcome to Boston!</h1>
             <ul>
                 {sitesToRender}
             </ul>
-        </div>
-
+        </>
     )
 }
 
