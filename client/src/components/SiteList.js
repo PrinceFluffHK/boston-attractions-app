@@ -26,6 +26,8 @@ const SiteList = (props) => {
     const sitesToRender = siteList.map((site) => {
         return (
             <SiteTile
+                key={site.id}
+                id={site.id}
                 name={site.name}
                 address={site.address}
                 description={site.description}
