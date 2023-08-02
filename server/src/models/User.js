@@ -28,9 +28,9 @@ class User extends uniqueFunc(Model) {
       type: "object",
       required: ["username", "firstName", "lastName", "email"],
       properties: {
-        username: { type: "string",minLength: 1, maxLength: 36},
-        firstName: { type: "string", minLength: 1},
-        lastName: { type: "string", minLength: 1},
+        username: { type: "string", maxLength: 36},
+        firstName: { type: "string"},
+        lastName: { type: "string"},
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" }
       },

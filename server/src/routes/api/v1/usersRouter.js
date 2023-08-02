@@ -18,10 +18,8 @@ usersRouter.post("/", async (req, res) => {
     });
   } catch (error) {
     if (error instanceof ValidationError) {
-      console.log(error.data)
       return res.status(422).json({ errors: error.data })
     }
-    console.log(error);
     return res.status(500).json({ errors: error });
   }
 });

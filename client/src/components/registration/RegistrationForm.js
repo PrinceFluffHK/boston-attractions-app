@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import FormError from "../layout/FormError";
 import config from "../../config";
-
-import translateServerErrors from "../../services/translateServerErrors";
-
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
     username:"",
@@ -25,7 +22,7 @@ const RegistrationForm = () => {
     newErrors = {
       ...newErrors,
       username: "must be no more than 36 characters"
-    }
+    };
   }
 
     if (username.trim() == "") {
@@ -96,9 +93,9 @@ const RegistrationForm = () => {
           }),
         });
         if (!response.ok) {
-            const errorMessage = `${response.status} (${response.statusText})`;
-            const error = new Error(errorMessage);
-            throw error;
+          const errorMessage = `${response.status} (${response.statusText})`;
+          const error = new Error(errorMessage);
+          throw error;
           }
         const userData = await response.json();
         setShouldRedirect(true);
