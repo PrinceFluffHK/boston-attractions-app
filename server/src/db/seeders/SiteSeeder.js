@@ -7,25 +7,22 @@ class SiteSeeder {
         name: "Boston Common",
         address: "139 Tremont St, Boston MA 02111",
         description: "Considered the oldest public park in the United States",
-        setting: "outdoor",
+        setting: "Outdoor",
         minimumAge: 0,
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/6/69/Aerial_View_Parkman_Bandstand_at_Boston_Common_2.jpg",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/69/Aerial_View_Parkman_Bandstand_at_Boston_Common_2.jpg"
       },
       {
         name: "Faneuil Hall",
         address: "Boston MA 02109",
-        description:
-          "For 280 years, Faneuil hall ('The Cradle of Liberty') has been a prominent meeting location for residents and visitors to Boston.",
-        setting: "hybrid",
+        description: "For 280 years, Faneuil hall ('The Cradle of Liberty') has been a prominent meeting location for residents and visitors to Boston.",
+        setting: "Hybrid",
         imageUrl: "https://www.nps.gov/bost/planyourvisit/images/FH-Web-2.jpg",
       },
       {
         name: "The Paul Revere House",
         address: "19 North Square, Boston MA 02113",
-        description:
-          "Colonial house of American patriot and Founding Father Paul Revere during the time of the American Revolution.",
-        setting: "indoor",
+        description: "Colonial house of American patriot and Founding Father Paul Revere during the time of the American Revolution.",
+        setting: "Indoor",
         minimumAge: 13,
       },
     ];
