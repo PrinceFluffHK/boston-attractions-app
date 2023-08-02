@@ -8,7 +8,6 @@ class Seeder {
   static async seed() {
     await SiteSeeder.seed()
     await UserSeeder.seed()
-    await ReviewSeeder.seed()
 
     console.log("Done!")
     await connection.destroy()

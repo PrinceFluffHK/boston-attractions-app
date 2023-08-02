@@ -34,33 +34,6 @@ class User extends uniqueFunc(Model) {
     };
   }
 
-  static get relationMappings() {
-    const { Review, Site } = require("./index.js")
-    return {
-      sites: {
-        relation: Model.ManyToManyRelation,
-        modelClass: Site,
-        join: {
-          from: "users.id",
-          through: {
-            from: "reviews.userId",
-            to: "reviews.siteId"
-          },
-          to: "sites.id"
-        }
-      },
-
-      reviews: {
-        relation: Model.HasManyRelation,
-        modelClass: Review,
-        join: {
-          from: "users.id",
-          to: "reviews.userId"
-        }
-      }
-    }
-  }
-
   $formatJson(json) {
     const serializedJson = super.$formatJson(json);
 

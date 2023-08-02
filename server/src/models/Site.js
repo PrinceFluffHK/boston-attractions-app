@@ -16,33 +16,6 @@ class Site extends Model {
       },
     };
   }
-
-  static get relationMappings() {
-    const { User, Review } = require("./index.js");
-    return {
-      users: {
-        relation: Model.ManyToManyRelation,
-        modelClass: User,
-        join: {
-          from: "sites.id",
-          through: {
-            from: "reviews.siteId",
-            to: "reviews.userId",
-          },
-          to: "users.id",
-        },
-      },
-
-      reviews: {
-        relation: Model.HasManyRelation,
-        modelClass: Review,
-        join: {
-          from: "sites.id",
-          to: "reviews.siteId",
-        },
-      },
-    };
-  }
 }
 
 module.exports = Site;
