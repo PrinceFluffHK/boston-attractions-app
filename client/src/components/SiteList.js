@@ -25,16 +25,15 @@ const SiteList = (props) => {
 
     const sitesToRender = siteList.map((site) => {
         return (
-            <li key={site.id}>
-                <SiteTile
-                    key={site.id}
-                    name={site.name}
-                    address={site.address}
-                    description={site.description}
-                    environment={site.setting}
-                    minimumAge={site.minimumAge}
-                />
-            </li>
+            <SiteTile
+                key={site.id}
+                id={site.id}
+                name={site.name}
+                address={site.address}
+                description={site.description}
+                setting={site.setting}
+                minimumAge={site.minimumAge}
+            />
         );
     });
 
