@@ -6,7 +6,7 @@
  * @param {Knex} knex
  */
 exports.up = async (knex) => {
-    return knex.schema.table("users", (table) =>{
+    return knex.schema.table("users", (table) => {
         table.string("username").notNullable()
         table.string("firstName").notNullable()
         table.string("lastName").notNullable()
@@ -22,5 +22,4 @@ exports.down = (knex) => {
         table.dropColumn("firstName")
         table.dropColumn("lastName")
     })
-    
 }
