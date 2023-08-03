@@ -4,16 +4,15 @@ import { Redirect } from "react-router-dom";
 
 const SiteForm = (props) => {
     const [siteRecord, setSiteRecord] = useState({
-        name: "Launch Academy",
-        address: "71 Summer St",
-        description: "Very cool :)",
+        name: "",
+        address: "",
+        description: "",
         setting: "",
-        minimumAge: "",
+        minimumAge: 0,
     });
     const [errors, setErrors] = useState([]);
     const [shouldRedirect, setShouldRedirect] = useState(false);
     const addNewSite = async () => {
-        console.log("hello from addNewSite")
         try {
             const response = await fetch("/api/v1/sites", {
                 method: "POST",
@@ -34,7 +33,6 @@ const SiteForm = (props) => {
                 }
             } else {
                 const body = await response.json();
-                console.log("THE POST WAS SUBMITTED SUCCESSFULLY", body);
                 setShouldRedirect(true);
             }
         } catch (error) {
@@ -43,8 +41,6 @@ const SiteForm = (props) => {
     };
 
     const handleChange = event => {
-        // const targetInput = event.currentTarget
-        // let value
         setSiteRecord({
             ...siteRecord, 
             [event.currentTarget.name]: event.currentTarget.value
@@ -53,17 +49,23 @@ const SiteForm = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        console.log("hi from handleSubmit")
         addNewSite()
     }
 
-    // console.log(shouldRedirect)
     if (shouldRedirect) {
         return <Redirect push to="/" />
     }
+    
+    const settings = ["", "Indoors", "Outdoors", "Indoors and Outdoors"]
+    const settingOptions = settings.map(setting => {
+        return(
+            <option key={setting} value={setting}>
+                {setting}
+            </option>
+        )
+    })
 
     return (
-        //add errorList
         <>
             <form onSubmit={handleSubmit}>
                 <h2>Add New Historical Site</h2>
@@ -97,14 +99,31 @@ const SiteForm = (props) => {
                         value={siteRecord.description}
                     />
                 </label>
+                <label htmlFor="minimumAge">
+                    Minimum Age (optional) 
+                    <input 
+                        id="minimumAge"
+                        type="integer"
+                        name="minimumAge"
+                        onChange={handleChange}
+                        value={siteRecord.minimumAge}
+                    />
+                </label>
+                <label htmlFor="setting">
+                    Select Setting
+                    <select
+                        id="setting"
+                        name="setting"
+                        onChange={handleChange}
+                        value={siteRecord.setting}
+                    >
+                        {settingOptions}
+                    </select>
+                </label>
                 <input type="submit" value="Add Site" />
             </form>
         </>
-            //name
-            //location
-            //description
-            //setting
-            //minimumAge
+
             //image upload (later)
         
     );

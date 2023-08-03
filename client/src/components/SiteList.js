@@ -41,8 +41,9 @@ const SiteList = (props) => {
     return (
         <>
             <h1>Welcome to Boston!</h1>
-            <Link to="/new-site" />
-            <h2></h2>
+            <Link to="/new-site">
+                <h4>Add New Historial Site</h4>
+            </Link>
             <ul>
                 {sitesToRender}
             </ul>

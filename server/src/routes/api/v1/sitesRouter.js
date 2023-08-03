@@ -21,7 +21,6 @@ sitesRouter.post("/", async (req, res) => {
         const newSite = await Site.query().insertAndFetch(formInput)
         return res.status(201).json({ site: newSite })
     } catch (error) {
-        console.log(error)
         if (error instanceof ValidationError) {
             return res.status(422).json({ error: error.data })
         }
