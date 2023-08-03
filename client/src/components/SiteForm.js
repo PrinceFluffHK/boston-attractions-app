@@ -6,7 +6,7 @@ const SiteForm = (props) => {
         name: "",
         location: "",
         description: "",
-        environment: "",
+        setting: "",
         minimumAge: ""
     })
     const [errors, setErrors] = useState([])
@@ -17,6 +17,7 @@ const SiteForm = (props) => {
                 "Content-Type": "application/json"
             }),
             body: JSON.stringify(siteRecord)
+            //
         })
         if(!response.ok) {
             if(response.status === 422) {
@@ -37,8 +38,24 @@ const SiteForm = (props) => {
             console.error(`Error in fetch: ${error.message}`)
         }
     }
+
+    //handle change function
+
+    //handle submit function
+
+    //redirect function
     
-        
+    return(
+        <>Hello from SiteForm</>
+        //form
+            //name
+            //location
+            //description
+            //setting
+            //minimumAge
+            //image upload (later)
+        //submit button
+    )
 }
 
 export default SiteForm
