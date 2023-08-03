@@ -11,7 +11,7 @@ class Review extends Model {
             required: ["textBody", "rating", "siteId", "userId"],
             properties: {
                 textBody: { type: "string" },
-                rating: { type: ["string", "integer"] },
+                rating: { type: ["string", "integer"], minimum: 1, maximum: 5 },
                 siteId: { type: ["string", "integer"] },
                 userId: { type: ["string", "integer"] }
             }
