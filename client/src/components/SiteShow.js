@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReviewTile from "./ReviewTile.js"
 
 const SiteShow = (props) => {
     const [site, setSite] = useState({
@@ -7,6 +8,7 @@ const SiteShow = (props) => {
         description: "",
         setting: "",
         minimumAge: 0,
+        reviews: []
     });
 
     const siteId = props.match.params.id;
@@ -33,6 +35,14 @@ const SiteShow = (props) => {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
 
+    const reviews = site.reviews.map(reviewObject => {
+        return (
+            <ReviewTile
+                key={reviewObject.id}
+                {...reviewObject}
+            />
+        )
+    })
     return (
         <div className="callout">
             <h1>{site.name}</h1>
@@ -40,6 +50,9 @@ const SiteShow = (props) => {
             <p>{site.description}</p>
             <p>{site.setting}</p>
             <p>{displayAge}</p>
+            <div className="callout secondary"> Reviews:
+                {reviews}
+            </div>
         </div>
     );
 };
