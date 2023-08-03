@@ -1,17 +1,18 @@
-import React from "react"
+import React from "react";
+import { Link } from "react-router-dom";
 
-const SiteTile = ({ name, address, description, environment, minimumAge }) => {
-    return(
-        <>
-            <h2>{name}</h2>
+const SiteTile = ({ name, address, description, setting, minimumAge, id }) => {
+    return (
+        <li>
+            <Link to={`/${id}`}>
+                <h2>{name}</h2>
+            </Link>
             <h3>{address}</h3>
             <p>{description}</p>
-            <ul>
-                <li>Setting: {environment}</li>
-                <li>Minimum Age: {minimumAge}</li>
-            </ul>
-        </>
-    )
-}
+            <p>Setting: {setting}</p>
+            <p>Minimum Age: {minimumAge}</p>
+        </li>
+    );
+};
 
-export default SiteTile
+export default SiteTile;
