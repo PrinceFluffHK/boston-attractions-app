@@ -1,6 +1,7 @@
 import express from "express";
 import { Site } from "../../../models/index.js"
-import cleanUserInput from "../../../"
+import cleanUserInput from "../../../services/cleanUserInput.js"
+import { ValidationError } from "objection";
 
 const sitesRouter = new express.Router();
 
@@ -15,11 +16,17 @@ sitesRouter.get("/", async (req, res) => {
 
 sitesRouter.post("/", async (req, res) => {
     const { body } = req
-    const formInput = ""
-    // try {
-    // } catch (error) {
-        
-    // }
+    const formInput = cleanUserInput(body)
+    try {
+        const newSite = await Site.query().insertAndFetch(formInput)
+        return res.status(201).json({ site: newSite })
+    } catch (error) {
+        console.log(error)
+        if (error instanceof ValidationError) {
+            return res.status(422).json({ error: error.data })
+        }
+        return res.status(500).json({ errors: error })
+    }
 })
 
 sitesRouter.get("/:id", async (req, res) => {
