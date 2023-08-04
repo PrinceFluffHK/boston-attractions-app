@@ -28,13 +28,27 @@ class User extends uniqueFunc(Model) {
       type: "object",
       required: ["username", "firstName", "lastName", "email"],
       properties: {
-        username: { type: "string", maxLength: 36},
-        firstName: { type: "string"},
-        lastName: { type: "string"},
+        username: { type: "string", maxLength: 36 },
+        firstName: { type: "string" },
+        lastName: { type: "string" },
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" }
       },
     };
+  }
+
+  static get relationMappings() {
+    const { Site, Review } = require("./index.js")
+    return {
+      reviews: {
+        relation: Model.HasManyRelation,
+        modelClass: Review,
+        join: {
+          from: "users.id",
+          to: "reviews.userId"
+        }
+      }
+    }
   }
 
   $formatJson(json) {
