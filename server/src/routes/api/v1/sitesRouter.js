@@ -1,6 +1,7 @@
 import express from "express";
-import { Site } from "../../../models/index.js"
+import uploadImage from "../../../services/uploadImage.js";
 import cleanUserInput from "../../../services/cleanUserInput.js"
+import { Site } from "../../../models/index.js"
 import { ValidationError } from "objection";
 
 const sitesRouter = new express.Router();
@@ -14,11 +15,17 @@ sitesRouter.get("/", async (req, res) => {
     }
 });
 
-sitesRouter.post("/", async (req, res) => {
-    const { body } = req
-    const formInput = cleanUserInput(body)
+sitesRouter.post("/", uploadImage.single("image"), async (req, res) => {
     try {
-        const newSite = await Site.query().insertAndFetch(formInput)
+        console.log(req.file.location)
+        const { body } = req
+        const formInput = cleanUserInput(body)
+        console.log("formInput", formInput)
+        const data = {
+            ...formInput,
+            image: req.file.location
+        }
+        const newSite = await Site.query().insertAndFetch(data)
         return res.status(201).json({ site: newSite })
     } catch (error) {
         if (error instanceof ValidationError) {
@@ -32,6 +39,7 @@ sitesRouter.get("/:id", async (req, res) => {
     const id = req.params.id;
     try {
         const site = await Site.query().findById(id);
+        site.reviews = await site.$relatedQuery("reviews")
         return res.status(200).json({ site: site });
     } catch (error) {
         return res.status(500).json({ errors: error });

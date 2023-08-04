@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import translateServerErrors from "../services/translateServerErrors.js";
 import { Redirect } from "react-router-dom";
 import ErrorList from "./layout/ErrorList";
-import Dropzone from "react-dropzone"
+import Dropzone from "react-dropzone";
 
 const SiteForm = (props) => {
     const [siteRecord, setSiteRecord] = useState({
@@ -15,14 +15,26 @@ const SiteForm = (props) => {
     });
     const [errors, setErrors] = useState([]);
     const [shouldRedirect, setShouldRedirect] = useState(false);
-    const addNewSite = async () => {
+
+    const addNewSite = async (event) => {
+        const siteFormData = new FormData()
+        siteFormData.append("name", siteRecord.name)
+        siteFormData.append("address", siteRecord.address)
+        siteFormData.append("description", siteRecord.description)
+        siteFormData.append("setting", siteRecord.setting)
+        siteFormData.append("minimumAge", siteRecord.minimumAge)
+        siteFormData.append("image", siteRecord.image)
+
         try {
             const response = await fetch("/api/v1/sites", {
                 method: "POST",
-                headers: new Headers({
-                    "Content-Type": "application/json",
-                }),
-                body: JSON.stringify(siteRecord),
+                // headers: new Headers({
+                //     "Content-Type": "application/json",
+                // }),
+                headers: {
+                    "Accept": "image/jpeg"
+                },
+                body: siteFormData
             });
             if (!response.ok) {
                 if (response.status === 422) {
@@ -36,14 +48,14 @@ const SiteForm = (props) => {
                 }
             } else {
                 const body = await response.json();
+                // console.log(body)
                 setShouldRedirect(true);
+                // setSiteRecord()
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`);
         }
     };
-
-    
 
     const handleChange = (event) => {
         setSiteRecord({
@@ -72,10 +84,10 @@ const SiteForm = (props) => {
 
     const handleSiteImageUpload = (acceptedSiteImage) => {
         setSiteRecord({
-            ...siteRecord, 
-            image: acceptedSiteImage[0]
-        })
-    }
+            ...siteRecord,
+            image: acceptedSiteImage[0],
+        });
+    };
 
     return (
         <>
@@ -134,7 +146,7 @@ const SiteForm = (props) => {
                     />
                 </label>
                 <Dropzone onDrop={handleSiteImageUpload}>
-                    {({getRootProps, getInputProps}) => (
+                    {({ getRootProps, getInputProps }) => (
                         <section>
                             <div {...getRootProps()}>
                                 <input {...getInputProps()} />
