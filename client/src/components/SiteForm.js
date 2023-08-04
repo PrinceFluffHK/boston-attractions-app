@@ -28,9 +28,6 @@ const SiteForm = (props) => {
         try {
             const response = await fetch("/api/v1/sites", {
                 method: "POST",
-                // headers: new Headers({
-                //     "Content-Type": "application/json",
-                // }),
                 headers: {
                     "Accept": "image/jpeg"
                 },
@@ -47,10 +44,7 @@ const SiteForm = (props) => {
                     throw error;
                 }
             } else {
-                const body = await response.json();
-                // console.log(body)
                 setShouldRedirect(true);
-                // setSiteRecord()
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`);
