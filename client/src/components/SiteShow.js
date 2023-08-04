@@ -7,6 +7,7 @@ const SiteShow = (props) => {
         description: "",
         setting: "",
         minimumAge: 0,
+        image: {}
     });
 
     const siteId = props.match.params.id;
