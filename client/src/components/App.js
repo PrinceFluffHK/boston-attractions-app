@@ -10,6 +10,7 @@ import TopBar from "./layout/TopBar";
 import SiteList from "./SiteList";
 import SiteForm from "./SiteForm";
 import SiteShow from "./SiteShow";
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -31,7 +32,7 @@ const App = (props) => {
             <TopBar user={currentUser} />
             <Switch>
             <Route exact path="/" component={SiteList}/>
-            <Route exact path="/new-site" component={SiteForm} />
+            <AuthenticatedRoute exact path="/new-site" component={SiteForm} user={currentUser}/>
             <Route exact path="/:id" component={SiteShow} />
             <Route exact path="/users/new" component={RegistrationForm} />
             <Route exact path="/user-sessions/new" component={SignInForm} />

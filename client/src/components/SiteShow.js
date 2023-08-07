@@ -10,6 +10,7 @@ const SiteShow = (props) => {
         minimumAge: 0,
         image: {},
         reviews: [],
+        // creatorName: ""
     });
 
     const siteId = props.match.params.id;
@@ -52,6 +53,7 @@ const SiteShow = (props) => {
                 Reviews:
                 {reviews}
             </div>
+            {/* <h6>Created by: {creatorName}</h6> */}
             <img src={site.image} />
         </div>
     );

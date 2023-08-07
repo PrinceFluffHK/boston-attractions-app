@@ -5,7 +5,9 @@ import ErrorList from "./layout/ErrorList";
 import Dropzone from "react-dropzone";
 
 const SiteForm = (props) => {
+    const { user } = props
     const [siteRecord, setSiteRecord] = useState({
+        creatorId: user.id,
         name: "",
         address: "",
         description: "",
@@ -19,17 +21,13 @@ const SiteForm = (props) => {
     const addNewSite = async (event) => {
         const siteFormData = new FormData()
         siteFormData.append("name", siteRecord.name)
+        siteFormData.append("creatorId", siteRecord.creatorId)
         siteFormData.append("address", siteRecord.address)
         siteFormData.append("description", siteRecord.description)
         siteFormData.append("setting", siteRecord.setting)
         siteFormData.append("minimumAge", siteRecord.minimumAge)
         siteFormData.append("image", siteRecord.image)
         
-        // if(siteRecord.image) {
-        // } else {
-        //     siteFormData.append("image", "https://static.displate.com/857x1200/displate/2020-03-12/c47b057f270b9101cfb4d462279d38b3_7477322f46cfe492f40beb04fe6d42ff.jpg")
-        // }
-
         let response;
         try {
             response = await fetch("/api/v1/sites", {
