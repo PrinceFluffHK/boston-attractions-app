@@ -11,30 +11,27 @@ const SiteForm = (props) => {
         description: "",
         setting: "",
         minimumAge: 0,
-        image: {}
+        image: {},
     });
     const [errors, setErrors] = useState([]);
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const addNewSite = async (event) => {
-        const siteFormData = new FormData()
-        siteFormData.append("name", siteRecord.name)
-        siteFormData.append("address", siteRecord.address)
-        siteFormData.append("description", siteRecord.description)
-        siteFormData.append("setting", siteRecord.setting)
-        siteFormData.append("minimumAge", siteRecord.minimumAge)
-        siteFormData.append("image", siteRecord.image)
+        const siteFormData = new FormData();
+        siteFormData.append("name", siteRecord.name);
+        siteFormData.append("address", siteRecord.address);
+        siteFormData.append("description", siteRecord.description);
+        siteFormData.append("setting", siteRecord.setting);
+        siteFormData.append("minimumAge", siteRecord.minimumAge);
+        siteFormData.append("image", siteRecord.image);
 
         try {
             const response = await fetch("/api/v1/sites", {
                 method: "POST",
-                // headers: new Headers({
-                //     "Content-Type": "application/json",
-                // }),
                 headers: {
-                    "Accept": "image/jpeg"
+                    "Accept": "image/jpeg",
                 },
-                body: siteFormData
+                body: siteFormData,
             });
             if (!response.ok) {
                 if (response.status === 422) {
@@ -48,9 +45,7 @@ const SiteForm = (props) => {
                 }
             } else {
                 const body = await response.json();
-                // console.log(body)
                 setShouldRedirect(true);
-                // setSiteRecord()
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`);
@@ -150,7 +145,7 @@ const SiteForm = (props) => {
                         <section>
                             <div {...getRootProps()}>
                                 <input {...getInputProps()} />
-                                <p>Upload a Relevant Picture (optional)</p>
+                                <p className="button">Upload a Relevant Picture (optional)</p>
                             </div>
                         </section>
                     )}
