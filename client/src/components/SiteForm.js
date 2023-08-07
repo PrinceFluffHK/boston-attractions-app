@@ -24,15 +24,18 @@ const SiteForm = (props) => {
         siteFormData.append("setting", siteRecord.setting)
         siteFormData.append("minimumAge", siteRecord.minimumAge)
         siteFormData.append("image", siteRecord.image)
-
+        let response;
         try {
-            const response = await fetch("/api/v1/sites", {
+            response = await fetch("/api/v1/sites", {
                 method: "POST",
                 headers: {
                     "Accept": "image/jpeg"
                 },
                 body: siteFormData
             });
+        } catch (error) {
+            console.error(`Error in fetch: ${error.message}`);
+        }
             if (!response.ok) {
                 if (response.status === 422) {
                     const body = await response.json();
@@ -46,9 +49,6 @@ const SiteForm = (props) => {
             } else {
                 setShouldRedirect(true);
             }
-        } catch (error) {
-            console.error(`Error in fetch: ${error.message}`);
-        }
     };
 
     const handleChange = (event) => {

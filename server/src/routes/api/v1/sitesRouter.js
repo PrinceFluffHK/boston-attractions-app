@@ -3,6 +3,11 @@ import uploadImage from "../../../services/uploadImage.js";
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import { Site } from "../../../models/index.js"
 import { ValidationError } from "objection";
+const foo = {
+    bar: {
+        baz: "abx"
+    }
+};
 
 const sitesRouter = new express.Router();
 
@@ -17,6 +22,13 @@ sitesRouter.get("/", async (req, res) => {
 
 sitesRouter.post("/", uploadImage.single("image"), async (req, res) => {
     try {
+        if (!!foo && !!foo.bar && !!foo.bar.baz) {
+            let thing = foo.bar.baz;
+        } else {
+            let thing = null;
+            throw new ValidationError();
+        }
+
         console.log(req.file.location)
         const { body } = req
         const formInput = cleanUserInput(body)
