@@ -4,8 +4,6 @@ import ReviewTile from "./ReviewTile.js"
 import translateServerErrors from "../services/translateServerErrors.js"
 const ReviewForm = (props) => {
     const [newReview, setNewReview] = useState({
-        userId: "",
-        siteId: "",
         textBody: "",
         rating: ""
     })
@@ -14,7 +12,7 @@ const ReviewForm = (props) => {
 
     const addNewReview = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/${siteId}/reviews`, {
+            const response = await fetch(`/api/v1/${siteId}/reviews`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",
