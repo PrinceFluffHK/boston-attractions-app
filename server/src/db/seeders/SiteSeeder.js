@@ -9,14 +9,12 @@ class SiteSeeder {
         description: "Considered the oldest public park in the United States",
         setting: "Outdoor",
         minimumAge: 0,
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/69/Aerial_View_Parkman_Bandstand_at_Boston_Common_2.jpg"
       },
       {
         name: "Faneuil Hall",
         address: "Boston MA 02109",
         description: "For 280 years, Faneuil hall ('The Cradle of Liberty') has been a prominent meeting location for residents and visitors to Boston.",
         setting: "Hybrid",
-        imageUrl: "https://www.nps.gov/bost/planyourvisit/images/FH-Web-2.jpg",
       },
       {
         name: "The Paul Revere House",

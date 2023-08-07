@@ -8,6 +8,7 @@
 exports.up = async (knex) => {
     return knex.schema.table("sites", table => {
         table.renameColumn("imageUrl", "image")
+        
     })
 }
 
