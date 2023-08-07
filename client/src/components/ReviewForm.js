@@ -1,18 +1,26 @@
-import React, { useState } from "react";
-import ReviewTile from "./ReviewTile.js"
-;
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 import translateServerErrors from "../services/translateServerErrors.js"
+
 const ReviewForm = (props) => {
+    console.log(props)
     const [newReview, setNewReview] = useState({
+        userId: props.user.id,
+        siteId: siteId,
         textBody: "",
         rating: ""
     })
 
     const [errors, setErrors] = useState([])
 
+
+    console.log(siteId)
+
+    const [shouldRedirect, setShouldRedirect] = useState(false);
+
     const addNewReview = async () => {
         try {
-            const response = await fetch(`/api/v1/${siteId}/reviews`, {
+            const response = await fetch(`/api/v1/sites/:${siteId}`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",
@@ -30,9 +38,11 @@ const ReviewForm = (props) => {
                     throw error
                 }
             } else {
-                // const responseBody = await response.json()
-                // const updatedReviews = sites.reviews.concat(responseBody.review)
-                // setErrors([])
+                const responseBody = await response.json()
+                const updatedReviews = site.reviews.concat(responseBody.review)
+                setErrors([])
+                // setNewReview({...site, reviews: updatedReviews})
+                // setShouldRedirect(true)
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -44,7 +54,10 @@ const ReviewForm = (props) => {
             ...newReview,
             [event.currentTarget.name]: event.currentTarget.value
         })
-        
+    }
+
+    if(shouldRedirect){
+        location.href=`/${siteId}`
     }
 
     const handleSubmit = (event) =>{
@@ -53,7 +66,7 @@ const ReviewForm = (props) => {
     }
 
     return (
-        <>
+        <div>
             <h1>
                 Add a Review
             </h1>
@@ -68,9 +81,22 @@ const ReviewForm = (props) => {
                         onChange={handleInputChange}
                     />
                 </label>
+                <label htmlFor="rating">
+                    Rating
+                    <input
+                        id="rating"
+                        type="text"
+                        name="rating"
+                        value={newReview.rating}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <Link to={`/${siteId}`}>
+                    Back
+                </Link>
                 <input type="submit" value="Submit Review"/>
             </form>
-        </>
+        </div>
     )
 }
 
