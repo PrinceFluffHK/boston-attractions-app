@@ -53,7 +53,7 @@ class User extends uniqueFunc(Model) {
         modelClass: Site,
         join: {
           from: "users.id",
-          to: "sites.userId"
+          to: "sites.creatorId"
         }
       }
     }

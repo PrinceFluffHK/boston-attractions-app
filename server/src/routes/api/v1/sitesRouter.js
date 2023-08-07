@@ -9,8 +9,6 @@ const sitesRouter = new express.Router();
 sitesRouter.get("/", async (req, res) => {
     try {
         const sites = await Site.query();
-        const creator = await Site.query().$relatedQuery("users")
-        console.log(creator)
         return res.status(200).json({ siteList: sites });
     } catch (error) {
         return res.status(500).json({ errors: error });
@@ -20,7 +18,6 @@ sitesRouter.get("/", async (req, res) => {
 sitesRouter.post("/", uploadImage.single("image"), async (req, res) => {
     try {
         const { body } = req;
-        // console.log(req.file.location)
         const formInput = cleanUserInput(body);
         let data
         if (req.file) {
@@ -45,11 +42,13 @@ sitesRouter.post("/", uploadImage.single("image"), async (req, res) => {
 });
 
 sitesRouter.get("/:id", async (req, res) => {
-    const id = req.params.id;
+    const { id } = req.params;
     try {
         const site = await Site.query().findById(id);
         site.reviews = await site.$relatedQuery("reviews");
-        return res.status(200).json({ site: site });
+        const user = await site.$relatedQuery("users")
+        const username = user.username
+        return res.status(200).json({ site, username });
     } catch (error) {
         return res.status(500).json({ errors: error });
     }

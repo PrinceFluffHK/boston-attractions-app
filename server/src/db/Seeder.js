@@ -6,11 +6,11 @@ import ReviewSeeder from "./seeders/ReviewSeeder.js"
 
 class Seeder {
   static async seed() {
-    console.log("Seeding sites")
-    await SiteSeeder.seed()
-
     console.log("logging in!")
     await UserSeeder.seed()
+
+    console.log("Seeding sites")
+    await SiteSeeder.seed()
 
     console.log("reviewing sites!")
     await ReviewSeeder.seed()

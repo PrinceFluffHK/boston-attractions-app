@@ -7,7 +7,7 @@
  */
 exports.up = async (knex) => {
     return knex.schema.table("sites", table => {
-        table.bigInteger("creatorId").notNullable().index().references("users.id")
+        table.bigInteger("creatorId").notNullable().index().unsigned().references("users.id")
     })
 }
 

@@ -7,8 +7,8 @@ import Dropzone from "react-dropzone";
 const SiteForm = (props) => {
     const { user } = props
     const [siteRecord, setSiteRecord] = useState({
-        creatorId: user.id,
         name: "",
+        creatorId: user.id,
         address: "",
         description: "",
         setting: "",
