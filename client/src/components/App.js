@@ -9,6 +9,7 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import SiteList from "./SiteList";
 import SiteShow from "./SiteShow";
+import ReviewForm from "./ReviewForm";
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -33,6 +34,7 @@ const App = (props) => {
                 <Route exact path="/:id" component={SiteShow} />
                 <Route exact path="/users/new" component={RegistrationForm} />
                 <Route exact path="/user-sessions/new" component={SignInForm} />
+                <Route exact path="/:id/new" component={ReviewForm}/> 
             </Switch>
         </Router>
     );
