@@ -3,17 +3,14 @@ import uploadImage from "../../../services/uploadImage.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import { Site } from "../../../models/index.js";
 import { ValidationError } from "objection";
-const foo = {
-    bar: {
-        baz: "abx"
-    }
-};
 
 const sitesRouter = new express.Router();
 
 sitesRouter.get("/", async (req, res) => {
     try {
         const sites = await Site.query();
+        const creator = await Site.query().$relatedQuery("users")
+        console.log(creator)
         return res.status(200).json({ siteList: sites });
     } catch (error) {
         return res.status(500).json({ errors: error });

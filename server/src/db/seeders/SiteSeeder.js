@@ -9,12 +9,14 @@ class SiteSeeder {
         description: "Considered the oldest public park in the United States",
         setting: "Outdoor",
         minimumAge: 0,
+        userId: 0
       },
       {
         name: "Faneuil Hall",
         address: "Boston MA 02109",
         description: "For 280 years, Faneuil hall ('The Cradle of Liberty') has been a prominent meeting location for residents and visitors to Boston.",
         setting: "Hybrid",
+        userId: 1
       },
       {
         name: "The Paul Revere House",
@@ -22,6 +24,7 @@ class SiteSeeder {
         description: "Colonial house of American patriot and Founding Father Paul Revere during the time of the American Revolution.",
         setting: "Indoor",
         minimumAge: 13,
+        userId: 0
       },
     ];
 

@@ -32,14 +32,10 @@ class Site extends Model {
                 }
             },
             users: {
-                relation: Model.ManyToManyRelation,
+                relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {
-                    from: "sites.id",
-                    through: {
-                        from: "reviews.siteId",
-                        to: "reviews.userId",
-                    },
+                    from: "sites.userId",
                     to: "users.id"
                 }
             }
