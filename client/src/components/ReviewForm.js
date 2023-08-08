@@ -11,8 +11,13 @@ const ReviewForm = (props) => {
     console.log(props)
 >>>>>>> 75786166859cbb97332c005da55c8db32ffee762
     const [newReview, setNewReview] = useState({
+<<<<<<< HEAD
         userId: props.user.id,
         siteId: siteId,
+=======
+        userId: "",
+        siteId: "",
+>>>>>>> parent of fd34688... matthew taken
         textBody: "",
         rating: ""
     })
@@ -29,7 +34,11 @@ const ReviewForm = (props) => {
 
     const addNewReview = async () => {
         try {
+<<<<<<< HEAD
             const response = await fetch(`/api/v1/sites/${siteId}/new-review`, {
+=======
+            const response = await fetch(`/api/v1/sites/${siteId}/reviews`, {
+>>>>>>> parent of fd34688... matthew taken
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",

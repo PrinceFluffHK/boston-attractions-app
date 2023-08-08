@@ -1,6 +1,9 @@
 import express from "express";
 import { Site } from "../../../models/index.js";
+<<<<<<< HEAD
 import siteReviewsRouter from "../v1/siteReviewsRouter.js"
+=======
+>>>>>>> parent of fd34688... matthew taken
 
 const sitesRouter = new express.Router();
 
@@ -24,6 +27,9 @@ sitesRouter.get("/:id", async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 sitesRouter.use("/:id/new-review", siteReviewsRouter)
 
+=======
+>>>>>>> parent of fd34688... matthew taken
 export default sitesRouter;
