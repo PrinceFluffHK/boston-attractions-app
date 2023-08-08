@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SiteTile from "./SiteTile";
+import { Link } from "react-router-dom";
 
 const SiteList = (props) => {
     const [siteList, setSiteList] = useState([]);
@@ -34,6 +35,7 @@ const SiteList = (props) => {
                 setting={site.setting}
                 minimumAge={site.minimumAge}
                 yearEstablished={site.yearEstablished}
+                image={site.image}
             />
         );
     });
@@ -41,6 +43,9 @@ const SiteList = (props) => {
     return (
         <>
             <h1>Welcome to Boston!</h1>
+            <Link to="/new-site">
+                <h4>Add New Historic Site</h4>
+            </Link>
             <ul>{sitesToRender}</ul>
         </>
     );

@@ -9,7 +9,9 @@ const SiteShow = (props) => {
         setting: "",
         yearEstablished: "",
         minimumAge: 0,
-        reviews: []
+        reviews: [],
+        image: {},
+        creatorUsername: ""
     });
 
     const siteId = props.match.params.id;
@@ -55,6 +57,7 @@ const SiteShow = (props) => {
             <div className="callout secondary"> Reviews:
                 {reviews}
             </div>
+            <h6>Contributed by: {site.creatorUsername}</h6>
         </div>
     );
 };
