@@ -14,16 +14,19 @@ class SiteSerializer {
         return serializedSite
     }
     
-    static getSummary(site) {
-        const requiredAttributes = ["name", "setting", "image", "minimumAge", "id"]
-        
-        let serializedSite = {}
+    static getSummary(array) {
+        const serializedSites = array.map(site => {
+            const requiredAttributes = ["name", "setting", "image", "minimumAge", "id"]
+            
+            let serializedSite = {}
+            for(let attribute of requiredAttributes) {
+                serializedSite[attribute] = site[attribute]
+            }
+    
+            return serializedSite
+        })
 
-        for(let attribute of requiredAttributes) {
-            serializedSite[attribute] = site[attribute]
-        }
-
-        return serializedSite
+        return serializedSites
     }
 }
 

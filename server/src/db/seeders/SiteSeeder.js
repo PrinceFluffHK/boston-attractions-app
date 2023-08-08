@@ -1,24 +1,27 @@
-import { Site } from "../../models/index.js";
+import { Site, User } from "../../models/index.js";
 
 class SiteSeeder {
   static async seed() {
+    const garrett = await User.query().findOne("firstName", "Garrett")
+    const matthew = await User.query().findOne("firstName", "Matthew")
+
     const siteData = [
       {
         name: "Boston Common",
         address: "139 Tremont St, Boston MA 02111",
         description: "Considered the oldest public park in the United States",
         setting: "Outdoors",
-        image: "https://images.squarespace-cdn.com/content/v1/5bd469dd2727be0524ab0289/1613093676402-T2YPZRQ14EGOP86P6K4H/Boston+Common.jpg",
+        image: "https://express-file-uploading-part-2-production.s3.amazonaws.com/Boston%2BCommon.jpeg",
         minimumAge: 0,
-        creatorId: 1
+        creatorId: garrett.id
       },
       {
         name: "Faneuil Hall",
         address: "Boston MA 02109",
         description: "For 280 years, Faneuil hall ('The Cradle of Liberty') has been a prominent meeting location for residents and visitors to Boston.",
         setting: "Indoors and Outdoors",
-        image: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Faneuil_Hall_%285813514354%29.jpg",
-        creatorId: 1
+        image: "https://express-file-uploading-part-2-production.s3.amazonaws.com/Faneuil_Hall.jpeg",
+        creatorId: garrett.id
       },
       {
         name: "The Paul Revere House",
@@ -26,8 +29,8 @@ class SiteSeeder {
         description: "Colonial house of American patriot and Founding Father Paul Revere during the time of the American Revolution.",
         setting: "Indoors",
         minimumAge: 13,
-        image: "https://www.thefreedomtrail.org/sites/default/files/styles/image_width__720/public/content/slider-gallery/paul_revere_house_2015_0.jpg?itok=md-r4dsC",
-        creatorId: 2
+        image: "https://express-file-uploading-part-2-production.s3.amazonaws.com/dusty.jpeg",
+        creatorId: matthew.id
       },
     ];
 

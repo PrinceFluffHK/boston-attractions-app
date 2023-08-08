@@ -8,7 +8,7 @@ class Site extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["name", "address", "description", "setting", "creatorId"],
+            required: ["name", "address", "description", "setting"],
             properties: {
                 name: { type: "string" },
                 address: { type: "string" },
@@ -32,7 +32,7 @@ class Site extends Model {
                     to: "reviews.siteId"
                 }
             },
-            users: {
+            creator: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {

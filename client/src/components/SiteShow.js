@@ -9,7 +9,7 @@ const SiteShow = (props) => {
         setting: "",
         minimumAge: 0,
         reviews: [],
-        image: {},
+        image: "",
         creatorUsername: ""
     });
 
