@@ -39,7 +39,6 @@ const SiteList = (props) => {
             />
         );
     });
-
     return (
         <>
             <h1>Welcome to Boston!</h1>

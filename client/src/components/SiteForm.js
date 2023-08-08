@@ -13,6 +13,7 @@ const SiteForm = (props) => {
         description: "",
         setting: "",
         minimumAge: 0,
+        yearEstablished:"",
         image: {},
     });
     const [errors, setErrors] = useState([]);
@@ -26,6 +27,7 @@ const SiteForm = (props) => {
         siteFormData.append("description", siteRecord.description);
         siteFormData.append("setting", siteRecord.setting);
         siteFormData.append("minimumAge", siteRecord.minimumAge);
+        siteFormData.append("yearEstablished", siteRecord.minimumAge);
         siteFormData.append("image", siteRecord.image);
 
         let response;
@@ -100,6 +102,16 @@ const SiteForm = (props) => {
                         name="name"
                         onChange={handleChange}
                         value={siteRecord.name}
+                    />
+                </label>
+                <label htmlFor="yearEstablished">
+                    Year Established
+                    <input
+                        id="yearEstablished"
+                        type="text"
+                        name="yearEstablished"
+                        onChange={handleChange}
+                        value={siteRecord.yearEstablished}
                     />
                 </label>
                 <label htmlFor="address">
