@@ -1,5 +1,6 @@
 import express from "express";
 import { Site } from "../../../models/index.js";
+import siteReviewsRouter from "./siteReviewsRouter.js"
 
 const sitesRouter = new express.Router();
 
@@ -22,5 +23,7 @@ sitesRouter.get("/:id", async (req, res) => {
         return res.status(500).json({ errors: error });
     }
 });
+
+sitesRouter.use("/:id/new-review", siteReviewsRouter)
 
 export default sitesRouter;
