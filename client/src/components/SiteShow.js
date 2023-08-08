@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReviewTile from "./ReviewTile.js"
+import { Link } from "react-router-dom"
+import ReviewForm from "./ReviewForm.js"
 
 const SiteShow = (props) => {
     const [site, setSite] = useState({
@@ -50,8 +52,14 @@ const SiteShow = (props) => {
             <p>{site.description}</p>
             <p>{site.setting}</p>
             <p>{displayAge}</p>
+
+                <Link to={`/${siteId}/new-review`} state={{ siteId: siteId}} >
+                    Add a review for {site.name}! :D
+                </Link>
+
             <div className="callout secondary"> Reviews:
                 {reviews}
+                {/* <ReviewForm siteId={siteId}/> */}
             </div>
         </div>
     );
