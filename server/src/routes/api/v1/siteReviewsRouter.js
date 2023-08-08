@@ -23,5 +23,3 @@ siteReviewsRouter.post("/", async (req, res) => {
         return res.status(500).json({ errors: error })
     }
 })
-
-export default siteReviewsRouter

@@ -21,7 +21,7 @@ class Site extends Model {
     }
 
     static get relationMappings() {
-        const { Review } = require("./index.js")
+        const { Review, User } = require("./index.js")
         return {
             reviews: {
                 relation: Model.HasManyRelation,
@@ -31,18 +31,18 @@ class Site extends Model {
                     to: "reviews.siteId"
                 }
             },
-            // users: {
-            //     relation: Model.ManyToManyRelation,
-            //     modelClass: User,
-            //     join: {
-            //         from: "sites.id",
-            //         through: {
-            //             from: "reviews.siteId",
-            //             to: "reviews.userId",
-            //         },
-            //         to: "users.id"
-            //     }
-            // }
+            users: {
+                relation: Model.ManyToManyRelation,
+                modelClass: User,
+                join: {
+                    from: "sites.id",
+                    through: {
+                        from: "reviews.siteId",
+                        to: "reviews.userId",
+                    },
+                    to: "users.id"
+                }
+            }
         }
     }
 }

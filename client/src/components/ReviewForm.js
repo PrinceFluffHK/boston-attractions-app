@@ -11,34 +11,15 @@ const ReviewForm = (props) => {
     console.log(props)
 >>>>>>> 75786166859cbb97332c005da55c8db32ffee762
     const [newReview, setNewReview] = useState({
-<<<<<<< HEAD
-        userId: props.user.id,
-        siteId: siteId,
-=======
-        userId: "",
-        siteId: "",
->>>>>>> parent of fd34688... matthew taken
         textBody: "",
         rating: ""
     })
 
     const [errors, setErrors] = useState([])
 
-    const [currentUser, setCurrentUser] = useState(undefined);
-    
-<<<<<<< HEAD
-    // const [shouldRedirect, setShouldRedirect] = useState(false);
-=======
-    const [shouldRedirect, setShouldRedirect] = useState(false);
->>>>>>> 75786166859cbb97332c005da55c8db32ffee762
-
     const addNewReview = async () => {
         try {
-<<<<<<< HEAD
-            const response = await fetch(`/api/v1/sites/${siteId}/new-review`, {
-=======
-            const response = await fetch(`/api/v1/sites/${siteId}/reviews`, {
->>>>>>> parent of fd34688... matthew taken
+            const response = await fetch(`/api/v1/${siteId}/reviews`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",
@@ -57,13 +38,9 @@ const ReviewForm = (props) => {
                     throw error
                 }
             } else {
-                const responseBody = await response.json()
-                const updatedReviews = site.reviews.concat(responseBody.review)
-                setErrors([])
-                setCurrentUser(currentUser)
-                setNewReview({...site, reviews: updatedReviews})
-                setShouldRedirect(true)
-                console.log(site)
+                // const responseBody = await response.json()
+                // const updatedReviews = sites.reviews.concat(responseBody.review)
+                // setErrors([])
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -75,11 +52,8 @@ const ReviewForm = (props) => {
             ...newReview,
             [event.currentTarget.name]: event.currentTarget.value
         })
+        
     }
-
-    // if(shouldRedirect){
-    //     location.href=`/${siteId}`
-    // }
 
     const handleSubmit = (event) =>{
         event.preventDefault()
@@ -87,7 +61,7 @@ const ReviewForm = (props) => {
     }
 
     return (
-        <div>
+        <>
             <h1>
                 Add a Review
             </h1>
@@ -102,22 +76,9 @@ const ReviewForm = (props) => {
                         onChange={handleInputChange}
                     />
                 </label>
-                <label htmlFor="rating">
-                    Rating
-                    <input
-                        id="rating"
-                        type="text"
-                        name="rating"
-                        value={newReview.rating}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <Link to={`/${siteId}`}>
-                    Back
-                </Link>
                 <input type="submit" value="Submit Review"/>
             </form>
-        </div>
+        </>
     )
 }
 

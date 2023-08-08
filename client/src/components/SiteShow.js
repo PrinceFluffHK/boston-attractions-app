@@ -53,7 +53,7 @@ const SiteShow = (props) => {
             <p>{site.setting}</p>
             <p>{displayAge}</p>
 
-                <Link to={`/${siteId}/new-review`} state={{ siteId: siteId}} >
+                <Link to={`/${siteId}/review-form`}>
                     Add a review for {site.name}! :D
                 </Link>
 
