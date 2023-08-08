@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import translateServerErrors from "../services/translateServerErrors.js"
+import Site from "../../../server/src/models/Site.js"
 
 const ReviewForm = (props) => {
+    const location = useLocation()
+    const siteId = location.pathname[1]
     console.log(props)
     const [newReview, setNewReview] = useState({
         userId: props.user.id,
@@ -13,14 +16,13 @@ const ReviewForm = (props) => {
 
     const [errors, setErrors] = useState([])
 
-
-    console.log(siteId)
-
+    const [currentUser, setCurrentUser] = useState(undefined);
+    
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const addNewReview = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/:${siteId}`, {
+            const response = await fetch(`/api/v1/sites/${siteId}/new-review`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",
@@ -28,6 +30,7 @@ const ReviewForm = (props) => {
                 body: JSON.stringify(newReview),
             })
             if(!response.ok) {
+                console.log('site:', site)
                 if(response.status === 422){
                     const body = await response.json()
                     const newErrors = translateServerErrors(body.errors)
@@ -41,8 +44,10 @@ const ReviewForm = (props) => {
                 const responseBody = await response.json()
                 const updatedReviews = site.reviews.concat(responseBody.review)
                 setErrors([])
-                // setNewReview({...site, reviews: updatedReviews})
-                // setShouldRedirect(true)
+                setCurrentUser(currentUser)
+                setNewReview({...site, reviews: updatedReviews})
+                setShouldRedirect(true)
+                console.log(site)
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -56,9 +61,9 @@ const ReviewForm = (props) => {
         })
     }
 
-    if(shouldRedirect){
-        location.href=`/${siteId}`
-    }
+    // if(shouldRedirect){
+    //     location.href=`/${siteId}`
+    // }
 
     const handleSubmit = (event) =>{
         event.preventDefault()
