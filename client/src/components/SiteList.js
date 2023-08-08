@@ -33,6 +33,7 @@ const SiteList = (props) => {
                 description={site.description}
                 setting={site.setting}
                 minimumAge={site.minimumAge}
+                yearEstablished={site.yearEstablished}
             />
         );
     });

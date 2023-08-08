@@ -16,6 +16,7 @@ class Site extends Model {
                 setting: { type: "string" },
                 minimumAge: { type: ["string", "integer"] },
                 imageUrl: { type: "string" },
+                yearEstablished: { type: ["string", "integer"]}
             },
         };
     }

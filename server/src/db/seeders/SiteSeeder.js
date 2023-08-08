@@ -9,6 +9,7 @@ class SiteSeeder {
         description: "Considered the oldest public park in the United States",
         setting: "Outdoor",
         minimumAge: 0,
+        yearEstablished: 1830,
         imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/69/Aerial_View_Parkman_Bandstand_at_Boston_Common_2.jpg"
       },
       {
@@ -23,6 +24,7 @@ class SiteSeeder {
         address: "19 North Square, Boston MA 02113",
         description: "Colonial house of American patriot and Founding Father Paul Revere during the time of the American Revolution.",
         setting: "Indoor",
+        yearEstablished: 1680,
         minimumAge: 13,
       },
     ];
