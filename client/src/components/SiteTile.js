@@ -7,8 +7,6 @@ const SiteTile = ({ name, address, description, setting, minimumAge, id, image }
             <Link to={`/${id}`}>
                 <h2>{name}</h2>
             </Link>
-            <h3>{address}</h3>
-            <p>{description}</p>
             <p>Setting: {setting}</p>
             <p>Minimum Age: {minimumAge}</p>
             <img src={image}/>

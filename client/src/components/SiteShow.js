@@ -8,9 +8,10 @@ const SiteShow = (props) => {
         description: "",
         setting: "",
         minimumAge: 0,
-        reviews: []
+        reviews: [],
+        image: {},
+        creatorUsername: ""
     });
-    const [username, setUsername] = useState("")
 
     const siteId = props.match.params.id;
 
@@ -22,7 +23,6 @@ const SiteShow = (props) => {
             }
             const body = await response.json();
             setSite(body.site);
-            setUsername(body.username)
         } catch (error) {
             console.error(`Error in Fetch: ${error.message}`);
         }
@@ -55,7 +55,7 @@ const SiteShow = (props) => {
             <div className="callout secondary"> Reviews:
                 {reviews}
             </div>
-            <h6>Contributed by: {username}</h6>
+            <h6>Contributed by: {site.creatorUsername}</h6>
         </div>
     );
 };

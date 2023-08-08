@@ -5,7 +5,7 @@ import ErrorList from "./layout/ErrorList";
 import Dropzone from "react-dropzone";
 
 const SiteForm = (props) => {
-    const { user } = props
+    const { user } = props;
     const [siteRecord, setSiteRecord] = useState({
         name: "",
         creatorId: user.id,
@@ -19,40 +19,40 @@ const SiteForm = (props) => {
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const addNewSite = async (event) => {
-        const siteFormData = new FormData()
-        siteFormData.append("name", siteRecord.name)
-        siteFormData.append("creatorId", siteRecord.creatorId)
-        siteFormData.append("address", siteRecord.address)
-        siteFormData.append("description", siteRecord.description)
-        siteFormData.append("setting", siteRecord.setting)
-        siteFormData.append("minimumAge", siteRecord.minimumAge)
-        siteFormData.append("image", siteRecord.image)
-        
+        const siteFormData = new FormData();
+        siteFormData.append("name", siteRecord.name);
+        siteFormData.append("creatorId", siteRecord.creatorId);
+        siteFormData.append("address", siteRecord.address);
+        siteFormData.append("description", siteRecord.description);
+        siteFormData.append("setting", siteRecord.setting);
+        siteFormData.append("minimumAge", siteRecord.minimumAge);
+        siteFormData.append("image", siteRecord.image);
+
         let response;
         try {
             response = await fetch("/api/v1/sites", {
                 method: "POST",
                 headers: {
-                    "Accept": "image/jpeg",
+                    Accept: "image/jpeg",
                 },
                 body: siteFormData,
             });
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`);
         }
-            if (!response.ok) {
-                if (response.status === 422) {
-                    const body = await response.json();
-                    const newErrors = translateServerErrors(body.error);
-                    return setErrors(newErrors);
-                } else {
-                    const errorMessage = `${response.status} (${response.statusText})`;
-                    const error = new Error(errorMessage);
-                    throw error;
-                }
+        if (!response.ok) {
+            if (response.status === 422) {
+                const body = await response.json();
+                const newErrors = translateServerErrors(body.error);
+                return setErrors(newErrors);
             } else {
-                setShouldRedirect(true);
+                const errorMessage = `${response.status} (${response.statusText})`;
+                const error = new Error(errorMessage);
+                throw error;
             }
+        } else {
+            setShouldRedirect(true);
+        }
     };
 
     const handleChange = (event) => {

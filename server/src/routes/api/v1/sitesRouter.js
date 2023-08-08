@@ -3,13 +3,18 @@ import uploadImage from "../../../services/uploadImage.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import { Site } from "../../../models/index.js";
 import { ValidationError } from "objection";
+import SiteSerializer from "../../../serializers/SiteSerializer.js"
 
 const sitesRouter = new express.Router();
 
 sitesRouter.get("/", async (req, res) => {
     try {
         const sites = await Site.query();
-        return res.status(200).json({ siteList: sites });
+        
+        const serializedSites = sites.map(site => {
+            return SiteSerializer.getSummary(site)
+        })
+        return res.status(200).json({ siteList: serializedSites });
     } catch (error) {
         return res.status(500).json({ errors: error });
     }
@@ -45,10 +50,8 @@ sitesRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const site = await Site.query().findById(id);
-        site.reviews = await site.$relatedQuery("reviews");
-        const user = await site.$relatedQuery("users")
-        const username = user.username
-        return res.status(200).json({ site, username });
+        const serializedSite = await SiteSerializer.getInfo(site)
+        return res.status(200).json({ site: serializedSite });
     } catch (error) {
         return res.status(500).json({ errors: error });
     }
