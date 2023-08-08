@@ -8,14 +8,14 @@ class Site extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["name", "address", "description", "setting", "yearEstablished"],
+            required: ["name", "address", "description", "setting"],
             properties: {
                 name: { type: "string" },
                 address: { type: "string" },
                 description: { type: "string" },
                 setting: { type: "string" },
                 minimumAge: { type: ["string", "integer"] },
-                yearEstablished: { type: ["string"], maxLength: 4},
+                yearEstablished: { type: ["string", "integer"], maxLength: 4},
                 image: { type: "string" },
                 creatorId: { type: ["string", "integer"] },
             },

@@ -7,7 +7,7 @@
  */
 exports.up = async (knex) => {
     return knex.schema.table("sites", (table) => {
-        table.string("yearEstablished").defaultTo("unspecified")
+        table.integer("yearEstablished").defaultTo(0)
     })
 }
 
