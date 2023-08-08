@@ -38,10 +38,10 @@ const SiteList = (props) => {
     });
 
     return (
-        <>
+        <div id = "parchment">
             <h1>Welcome to Boston!</h1>
             <ul>{sitesToRender}</ul>
-        </>
+        </div>
     );
 };
 

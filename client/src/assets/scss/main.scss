@@ -12,3 +12,20 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+h1 {
+  text-align: center;
+  font-family: 'Papyrus'
+}
+
+#parchment {
+  position: absolute;
+  width: 98%;
+  min-height: calc((1vw + 1vh) * 75);
+  top: 0%; left: 50%; transform: translate(-50%, 0);
+  margin: 4em 0;
+    padding: 4em;
+    box-shadow: 4px 3px 20px black, 0 0 60px #8a4d0f inset;
+    background: #fffef0;
+  filter: url(#wavy2);
+}
