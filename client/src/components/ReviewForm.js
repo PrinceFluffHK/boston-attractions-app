@@ -6,10 +6,6 @@ import Site from "../../../server/src/models/Site.js"
 const ReviewForm = (props) => {
     const location = useLocation()
     const siteId = location.pathname[1]
-<<<<<<< HEAD
-=======
-    console.log(props)
->>>>>>> 75786166859cbb97332c005da55c8db32ffee762
     const [newReview, setNewReview] = useState({
         textBody: "",
         rating: ""
