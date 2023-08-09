@@ -4,22 +4,15 @@ import { Link } from "react-router-dom"
 import translateServerErrors from "../services/translateServerErrors.js"
 
 const ReviewForm = (props) => {
-    console.log("AND I'M THE reviewform's props", props)
-    const site = props.site
-    const currentUser = props.currentUser
-    console.log("PROPS FROM REVIEW FORM", props)
-
+    
     const [newReview, setNewReview] = useState({
-        // siteId: site.id,
-        // userId: currentUser.id,
         textBody: "",
         rating: ""
     })
-    console.log("NEW REVIEW DOT SITE ID", newReview)
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({})
+    const site = props.site
 
     const addNewReview = async (formData) => {
-        console.log("form data incoming", formData)
         try {
             const response = await fetch(`/api/v1/sites/${site.id}`, {
                 method: "POST",
@@ -28,12 +21,9 @@ const ReviewForm = (props) => {
                 }),
                 body: JSON.stringify(formData)
             })
-            // console.log("RESPONSE", response.body)
 
             if (!response.ok) {
                 if (response.status === 422) {
-                    console.log("NEW REVIEW", newReview)
-                    console.log("RESPONSEE:", response)
                     const body = await response.json()
                     const newErrors = translateServerErrors(body.errors)
                     return setErrors(newErrors)
@@ -43,9 +33,9 @@ const ReviewForm = (props) => {
             } else {
                 const responseBody = await response.json()
                 console.log("Bodyless?", responseBody)
-                const reviewData = site.reviews.concat(responseBody.review)
-                setErrors([])
-                setNewReview({ ...site, reviews: reviewData, siteId: siteId })
+                const reviewData = site.reviews.concat(responseBody.newReview)
+                setErrors({})
+                props.setSite({ ...site, reviews: reviewData })
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -61,7 +51,7 @@ const ReviewForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        addNewReview()
+        addNewReview(newReview)
     }
 
     const clearForm = () => {

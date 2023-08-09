@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ReviewTile from "./ReviewTile.js"
-import { Link } from "react-router-dom"
-import ReviewForm from "./ReviewForm.js"
-
+import ReviewTile from "./ReviewTile.js";
+import { Link } from "react-router-dom";
+import ReviewForm from "./ReviewForm.js";
 
 const SiteShow = (props) => {
-    console.log("I'm the siteShowPage props!", props)
     const [site, setSite] = useState({
         name: "",
         address: "",
@@ -14,14 +12,11 @@ const SiteShow = (props) => {
         minimumAge: 0,
         reviews: [],
         image: "",
-        creatorUsername: ""
+        creatorUsername: "",
     });
 
-    const currentUser = props.user
-    console.log("The current user is ", currentUser)
-
-    // define site id using react router props
-    const siteIdFromProps = props.match.params.id
+    const currentUser = props.user;
+    const siteIdFromProps = props.match.params.id;
 
     const getSite = async () => {
         try {
@@ -45,14 +40,9 @@ const SiteShow = (props) => {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
 
-    const reviews = site.reviews.map(reviewObject => {
-        return (
-            <ReviewTile
-                key={reviewObject.id}
-                {...reviewObject}
-            />
-        )
-    })
+    const reviews = site.reviews.map((reviewObject) => {
+        return <ReviewTile key={reviewObject.id} {...reviewObject} />;
+    });
     return (
         <div className="callout">
             <h1>{site.name}</h1>
@@ -60,10 +50,10 @@ const SiteShow = (props) => {
             <p>{site.description}</p>
             <p>{site.setting}</p>
             <p>{displayAge}</p>
-            <div className="callout secondary"> Reviews:
-                <ReviewForm
-                site={site}
-                currentUser={currentUser}/>
+            <div className="callout secondary">
+                {" "}
+                Reviews:
+                <ReviewForm site={site} currentUser={currentUser} setSite={setSite} />
                 {reviews}
             </div>
             <h6>Contributed by: {site.creatorUsername}</h6>
