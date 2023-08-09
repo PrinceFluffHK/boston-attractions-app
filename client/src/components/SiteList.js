@@ -30,13 +30,15 @@ const SiteList = (props) => {
                 key={site.id}
                 id={site.id}
                 name={site.name}
+                address={site.address}
+                description={site.description}
                 setting={site.setting}
                 minimumAge={site.minimumAge}
+                yearEstablished={site.yearEstablished}
                 image={site.image}
             />
         );
     });
-
     return (
         <>
             <h1>Welcome to Boston!</h1>

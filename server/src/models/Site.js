@@ -15,6 +15,7 @@ class Site extends Model {
                 description: { type: "string" },
                 setting: { type: "string" },
                 minimumAge: { type: ["string", "integer"] },
+                yearEstablished: { type: ["string", "integer"], maxLength: 4},
                 image: { type: "string" },
                 creatorId: { type: ["string", "integer"] },
             },
