@@ -33,7 +33,7 @@ class Site extends Model {
                     to: "reviews.siteId"
                 }
             },
-            users: {
+            creator: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {

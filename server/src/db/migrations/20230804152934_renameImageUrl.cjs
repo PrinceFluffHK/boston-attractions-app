@@ -7,8 +7,8 @@
  */
 exports.up = async (knex) => {
     return knex.schema.table("sites", table => {
-        table.renameColumn("imageUrl", "image")
-        
+        table.dropColumn("imageUrl")
+        table.string("image").defaultTo("https://express-file-uploading-part-2-production.s3.amazonaws.com/boston.jpeg")
     })
 }
 
@@ -17,6 +17,7 @@ exports.up = async (knex) => {
 */
 exports.down = (knex) => {
     return knex.schema.table("sites", table => {
-        table.renameColumn("image", "imageUrl")
+        table.dropColumn("image")
+        table.string("imageUrl")
     })
 }
