@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
 
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
