@@ -32,7 +32,6 @@ sitesRouter.post("/", uploadImage.single("image"), async (req, res) => {
         const newSite = await Site.query().insertAndFetch(data);
         return res.status(201).json({ site: newSite });
     } catch (error) {
-        console.log(error)
         if (error instanceof ValidationError) {
             return res.status(422).json({ error: error.data });
         }

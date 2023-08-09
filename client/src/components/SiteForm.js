@@ -8,7 +8,6 @@ const SiteForm = (props) => {
     const { user } = props;
     const [siteRecord, setSiteRecord] = useState({
         name: "",
-        creatorId: user.id,
         address: "",
         description: "",
         setting: "",
@@ -21,7 +20,6 @@ const SiteForm = (props) => {
     const addNewSite = async (event) => {
         const siteFormData = new FormData();
         siteFormData.append("name", siteRecord.name);
-        siteFormData.append("creatorId", siteRecord.creatorId);
         siteFormData.append("address", siteRecord.address);
         siteFormData.append("description", siteRecord.description);
         siteFormData.append("setting", siteRecord.setting);
