@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 
-const ReviewTile = ({ textBody, rating }) => {
+const ReviewTile = ({ textBody, rating, votes }) => {
+    const [voteValue, setVoteValue] = useState(0)
+
     return (
         <div className="callout secondary">
             <p>
@@ -9,7 +11,6 @@ const ReviewTile = ({ textBody, rating }) => {
             <p>
                 {textBody}
             </p>
-            
         </div>
     )
 }
