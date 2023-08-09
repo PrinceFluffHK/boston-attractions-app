@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReviewTile from "./ReviewTile.js"
 import { Link } from "react-router-dom"
+import ReviewForm from "./ReviewForm.js"
+
 
 const SiteShow = (props) => {
+    console.log("I'm the siteShowPage props!", props)
     const [site, setSite] = useState({
         name: "",
         address: "",
@@ -12,11 +15,15 @@ const SiteShow = (props) => {
         reviews: []
     });
 
-    const siteId = props.match.params.id;
+    const currentUser = props.user
+    console.log("The current user is ", currentUser)
+
+    // define site id using react router props
+    const siteIdFromProps = props.match.params.id
 
     const getSite = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/${siteId}`);
+            const response = await fetch(`/api/v1/sites/${siteIdFromProps}`);
             if (!response.ok) {
                 throw new Error(`${response.status} (${response.statusText})`);
             }
@@ -51,10 +58,10 @@ const SiteShow = (props) => {
             <p>{site.description}</p>
             <p>{site.setting}</p>
             <p>{displayAge}</p>
-            <Link to={`${siteId}/new-review`}>
-                Review this Historic Site! :D
-            </Link>
             <div className="callout secondary"> Reviews:
+                <ReviewForm
+                site={site}
+                currentUser={currentUser}/>
                 {reviews}
             </div>
         </div>

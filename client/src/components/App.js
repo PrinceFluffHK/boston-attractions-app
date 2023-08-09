@@ -10,6 +10,7 @@ import TopBar from "./layout/TopBar";
 import SiteList from "./SiteList";
 import SiteShow from "./SiteShow";
 import ReviewForm from "./ReviewForm";
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute"
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -25,16 +26,17 @@ const App = (props) => {
     useEffect(() => {
         fetchCurrentUser();
     }, []);
-
+// console.warn("The user is:", currentUser)
+// const currentUserId = currentUser ? currentUser.id : 0
     return (
         <Router>
             <TopBar user={currentUser} />
             <Switch>
                 <Route exact path="/" component={SiteList} />
-                <Route exact path="/:id" component={SiteShow} />
+                <Route exact path="/sites/:id" render={(props) => <SiteShow user={currentUser} {...props} /> } />
+
                 <Route exact path="/users/new" component={RegistrationForm} />
-                <Route exact path="/user-sessions/new" component={SignInForm} />
-                <Route exact path="/:id/new-review" component={ReviewForm} user={currentUser}/> 
+                <Route exact path="/user-sessions/new" component={SignInForm} /> 
             </Switch>
         </Router>
     );

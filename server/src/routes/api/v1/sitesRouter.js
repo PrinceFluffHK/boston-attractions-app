@@ -24,6 +24,6 @@ sitesRouter.get("/:id", async (req, res) => {
     }
 });
 
-sitesRouter.use("/:id/new-review", siteReviewsRouter)
+sitesRouter.use("/:siteId", siteReviewsRouter)
 
 export default sitesRouter;
