@@ -8,14 +8,15 @@ class Site extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["name", "address", "description"],
+            required: ["name", "address", "description", "setting"],
             properties: {
                 name: { type: "string" },
                 address: { type: "string" },
                 description: { type: "string" },
                 setting: { type: "string" },
                 minimumAge: { type: ["string", "integer"] },
-                imageUrl: { type: "string" },
+                image: { type: "string" },
+                creatorId: { type: ["string", "integer"] },
             },
         };
     }
@@ -31,15 +32,11 @@ class Site extends Model {
                     to: "reviews.siteId"
                 }
             },
-            users: {
-                relation: Model.ManyToManyRelation,
+            creator: {
+                relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {
-                    from: "sites.id",
-                    through: {
-                        from: "reviews.siteId",
-                        to: "reviews.userId",
-                    },
+                    from: "sites.creatorId",
                     to: "users.id"
                 }
             }
