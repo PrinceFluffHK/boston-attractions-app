@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
-
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
@@ -11,12 +10,6 @@ import TopBar from "./layout/TopBar";
 import SiteList from "./SiteList";
 import SiteForm from "./SiteForm";
 import SiteShow from "./SiteShow";
-<<<<<<< HEAD
-import ReviewForm from "./ReviewForm";
-import AuthenticatedRoute from "./authentication/AuthenticatedRoute"
-=======
-import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
->>>>>>> 68701feda105c77df9f57f2e31ae3329372c3c81
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
