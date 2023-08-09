@@ -18,7 +18,7 @@ class SiteSerializer {
     }
 
     static async getInfo(site) {
-        const requiredAttributes = ["name", "address", "description", "setting", "image", "minimumAge", "yearEstablished"]
+        const requiredAttributes = ["name", "address", "description", "setting", "image", "minimumAge", "yearEstablished", "id"]
         
         let serializedSite = {}
         for(let attribute of requiredAttributes) {
@@ -28,7 +28,8 @@ class SiteSerializer {
         const user = await site.$relatedQuery("creator")
         serializedSite.creatorUsername = await user.username
         const reviews = await site.$relatedQuery("reviews");
-        serializedSite.reviews = ReviewSerializer.getSummary(reviews)
+        serializedSite.reviews = await ReviewSerializer.getSummary(reviews)
+        console.log("serializedSite", serializedSite)
         
         return serializedSite
     }
