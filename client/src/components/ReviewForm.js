@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom"
 
 import translateServerErrors from "../services/translateServerErrors.js"
 
 const ReviewForm = (props) => {
-    
+
     const [newReview, setNewReview] = useState({
         textBody: "",
         rating: ""
     })
+
     const [errors, setErrors] = useState({})
     const site = props.site
 
@@ -32,7 +33,6 @@ const ReviewForm = (props) => {
                 }
             } else {
                 const responseBody = await response.json()
-                console.log("Bodyless?", responseBody)
                 const reviewData = site.reviews.concat(responseBody.newReview)
                 setErrors({})
                 props.setSite({ ...site, reviews: reviewData })
@@ -48,17 +48,21 @@ const ReviewForm = (props) => {
             [event.currentTarget.name]: event.currentTarget.value
         })
     }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        addNewReview(newReview)
-    }
-
+    
     const clearForm = () => {
         setNewReview({
             textBody: "",
             rating: ""
         })
+    }
+
+    const currentUser = props.currentUser
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        if (currentUser) {
+            addNewReview(newReview)
+        }
     }
 
     return (
@@ -98,7 +102,5 @@ const ReviewForm = (props) => {
         </div>
     )
 }
-
-
 
 export default ReviewForm

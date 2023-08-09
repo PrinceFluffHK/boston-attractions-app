@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ReviewTile from "./ReviewTile.js";
-import { Link } from "react-router-dom";
 import ReviewForm from "./ReviewForm.js";
 
 const SiteShow = (props) => {
@@ -43,6 +42,7 @@ const SiteShow = (props) => {
     const reviews = site.reviews.map((reviewObject) => {
         return <ReviewTile key={reviewObject.id} {...reviewObject} />;
     });
+
     return (
         <div className="callout">
             <h1>{site.name}</h1>

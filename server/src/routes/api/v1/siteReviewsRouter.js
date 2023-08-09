@@ -12,15 +12,9 @@ siteReviewsRouter.post("/", async (req, res) => {
     const formData = cleanUserInput(body)
     formData.siteId = req.params.siteId
     formData.userId = req.user.id
-
-    console.log("1. Look at all this sheit", formData)
     
-    try{
-        // const user = await User.$relatedQuery()
+    try {
         const newReview = await Review.query().insertAndFetch(formData)
-        // console.log("2. Even more other sheit??", body, formData, siteId, userId)
-
-        // console.log("and IIII'm a NEW review", newReview)
         return res.status(201).json({ newReview })
     } catch (error) {
         if (error instanceof ValidationError) {

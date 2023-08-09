@@ -25,8 +25,7 @@ const App = (props) => {
     useEffect(() => {
         fetchCurrentUser();
     }, []);
-// console.warn("The user is:", currentUser)
-// const currentUserId = currentUser ? currentUser.id : 0
+
     return (
         <Router>
             <TopBar user={currentUser} />
