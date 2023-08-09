@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-const SiteTile = ({ name, address, description, setting, minimumAge, yearEstablished, id, image }) => {
+const SiteTile = ({ name, setting, minimumAge, yearEstablished, id, image }) => {
     let established = yearEstablished
-    if (yearEstablished === 0){
+    if (yearEstablished === 0) {
         established = "Unspecified"
     }
     return (
@@ -13,8 +13,6 @@ const SiteTile = ({ name, address, description, setting, minimumAge, yearEstabli
                 <h2>{name}</h2>
             </Link>
             <h3>Est: {established}</h3>
-            <p>Location: {address}</p>
-            <p>{description}</p>
             <p>Setting: {setting}</p>
             <p>Minimum Age: {minimumAge}</p>
             <img src={image}/>

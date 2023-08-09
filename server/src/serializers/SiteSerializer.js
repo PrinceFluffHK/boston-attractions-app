@@ -7,6 +7,7 @@ class SiteSerializer {
             for(let attribute of requiredAttributes) {
                 serializedSite[attribute] = site[attribute]
             }
+            console.log(serializedSite)
             
             return serializedSite
         })

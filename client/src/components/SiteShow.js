@@ -7,7 +7,7 @@ const SiteShow = (props) => {
         address: "",
         description: "",
         setting: "",
-        yearEstablished:"",
+        yearEstablished: "",
         minimumAge: 0,
         reviews: [],
         image: "",
