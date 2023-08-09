@@ -12,7 +12,9 @@ const SiteShow = (props) => {
         description: "",
         setting: "",
         minimumAge: 0,
-        reviews: []
+        reviews: [],
+        image: "",
+        creatorUsername: ""
     });
 
     const currentUser = props.user
@@ -64,6 +66,7 @@ const SiteShow = (props) => {
                 currentUser={currentUser}/>
                 {reviews}
             </div>
+            <h6>Contributed by: {site.creatorUsername}</h6>
         </div>
     );
 };

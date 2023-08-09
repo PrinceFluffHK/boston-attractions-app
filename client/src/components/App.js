@@ -9,9 +9,14 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import SiteList from "./SiteList";
+import SiteForm from "./SiteForm";
 import SiteShow from "./SiteShow";
+<<<<<<< HEAD
 import ReviewForm from "./ReviewForm";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute"
+=======
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
+>>>>>>> 68701feda105c77df9f57f2e31ae3329372c3c81
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -35,7 +40,7 @@ const App = (props) => {
             <Switch>
                 <Route exact path="/" component={SiteList} />
                 <Route exact path="/sites/:id" render={(props) => <SiteShow user={currentUser} {...props} /> } />
-
+                <AuthenticatedRoute exact path="/new-site" component={SiteForm} user={currentUser}/>
                 <Route exact path="/users/new" component={RegistrationForm} />
                 <Route exact path="/user-sessions/new" component={SignInForm} /> 
             </Switch>
