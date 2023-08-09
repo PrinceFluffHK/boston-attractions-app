@@ -9,6 +9,7 @@ const ReviewTile = ({ textBody, rating }) => {
             <p>
                 {textBody}
             </p>
+            
         </div>
     )
 }

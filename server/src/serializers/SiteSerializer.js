@@ -1,3 +1,5 @@
+import ReviewSerializer from "./ReviewSerializer.js"
+
 class SiteSerializer {
     static getSummary(array) {
         const serializedSites = array.map(site => {
@@ -24,7 +26,8 @@ class SiteSerializer {
         
         const user = await site.$relatedQuery("creator")
         serializedSite.creatorUsername = await user.username
-        serializedSite.reviews = await site.$relatedQuery("reviews");
+        const reviews = await site.$relatedQuery("reviews");
+        serializedSite.reviews = ReviewSerializer.getSummary(reviews)
         
         return serializedSite
     }
