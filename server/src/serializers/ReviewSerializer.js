@@ -20,10 +20,11 @@ class ReviewSerializer {
                     const serializedVote = VoteSerializer.getDetails(vote, user)
 
                     netVoteValue += serializedVote.voteValue
-                    if(serializedVote.voterId === user.id) {
-                        serializedReview.hasVoted = true
-                    } else {
-                        serializedReview.hasVoted = false
+                    serializedReview.hasVoted = false
+                    if(user) {
+                        if(serializedVote.voterId === user.id) {
+                            serializedReview.hasVoted = true
+                        }
                     }
                 })
                 serializedReview.netVoteValue = netVoteValue

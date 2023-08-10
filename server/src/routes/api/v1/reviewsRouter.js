@@ -6,7 +6,6 @@ const reviewsRouter = new express.Router()
 
 reviewsRouter.post("/:id", async (req, res) => {
     const { body, user } = req
-    console.log(body)
     const formInput = {
         voteValue: body.value,
         reviewId: req.params.id,
@@ -14,7 +13,6 @@ reviewsRouter.post("/:id", async (req, res) => {
     }
     try {
         const persistedVote = await Vote.query().insertAndFetch(formInput)
-        console.log("persisting vote...")
         return res.status(200).json({ vote: persistedVote })
     } catch (error) {
         if (error instanceof ValidationError) {

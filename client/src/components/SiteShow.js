@@ -48,6 +48,7 @@ const SiteShow = (props) => {
                 key={reviewObject.id}
                 {...reviewObject}
                 user={props.user}
+                setReviews={setReviews}
             />
         )
     })
@@ -63,24 +64,26 @@ const SiteShow = (props) => {
             reviews={reviews}
         />
     } else {
-        showReviewForm = <h4>Please Sign Up, or Sign In, To Contribute A Review To {site.name}</h4>
+        showReviewForm = <h4>Please Sign Up or Sign In To Contribute A Review To {site.name}</h4>
     }
 
     return (
-        <div className="parchment col1">
-            <div className="">
-                <h1>{site.name}</h1>
-                <h2>Est: {site.yearEstablished}</h2>
-                <h3>Location: {site.address}</h3>
-                <p>Setting: {site.setting}</p>
-                <p>{displayAge}</p>
-                <p>{site.description}</p>
-                <h6>Contributed by: {site.creatorUsername}</h6>
-            </div>
-            <div className="callout secondary">
-                Reviews:
-                {showReviewForm}
-                {reviewList}
+        <div className="parchment">
+            <h1>{site.name}</h1>
+            <div className="col1">
+                <div >
+                    <h2>Est: {site.yearEstablished}</h2>
+                    <h3>Location: {site.address}</h3>
+                    <p>Setting: {site.setting}</p>
+                    <p>{displayAge}</p>
+                    <p>{site.description}</p>
+                    <h6>Contributed by: {site.creatorUsername}</h6>
+                </div>
+                <div className="callout secondary">
+                    Reviews:
+                    {showReviewForm}
+                    {reviewList}
+                </div>
             </div>
         </div>
     );

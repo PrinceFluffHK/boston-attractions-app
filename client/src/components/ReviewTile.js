@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import translateServerErrors from "../services/translateServerErrors.js";
 import VoteButtons from "./VoteButtons.js";
 
-const ReviewTile = ({ textBody, rating, id, user, netVoteValue, hasVoted, creatorName }) => {
+const ReviewTile = ({ textBody, rating, id, user, netVoteValue, hasVoted, creatorName, setReviews }) => {
     const addVote = async (value) => {
         try {
             const response = await fetch(`/api/v1/reviews/${id}`, {
@@ -21,11 +21,12 @@ const ReviewTile = ({ textBody, rating, id, user, netVoteValue, hasVoted, creato
             // update state of reviews: find the review we voted and change its hasVoted status
             netVoteValue += value;
             hasVoted = true;
+
+
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`);
         }
     };
-    // console.log("hasVoted", hasVoted);
     
     const handleUpVote = (event) => {
         console.log("netVoteValue: ", netVoteValue);

@@ -40,8 +40,8 @@ class SiteSerializer {
             serializedSite[attribute] = site[attribute];
         }
 
-        // const user = await site.$relatedQuery("creator");
-        serializedSite.creatorUsername = await user.username;
+        const creator = await site.$relatedQuery("creator");
+        serializedSite.creatorUsername = await creator.username;
         const reviews = await site.$relatedQuery("reviews");
         serializedSite.reviews = await ReviewSerializer.getSummary(reviews, user);
 
