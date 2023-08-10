@@ -70,7 +70,7 @@ const SiteShow = (props) => {
     return (
         <div className="parchment">
             <h1>{site.name}</h1>
-            <div className="col1">
+            <div className="container">
                 <div >
                     <img src={site.image} alt={site.description} />
                     <h2>Est: {site.yearEstablished}</h2>

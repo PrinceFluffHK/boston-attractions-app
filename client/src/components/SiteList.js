@@ -45,7 +45,9 @@ const SiteList = (props) => {
             <Link to="/new-site">
                 <h4>Add New Historic Site</h4>
             </Link>
-            <ul>{sitesToRender}</ul>
+            <div className="container__md_4">
+                {sitesToRender}
+            </div>
         </div>
     );
 };

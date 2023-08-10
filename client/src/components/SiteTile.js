@@ -8,15 +8,15 @@ const SiteTile = ({ name, setting, minimumAge, yearEstablished, id, image }) => 
         established = "Unspecified"
     }
     return (
-        <button className="callout secondary">
-        <li className="col1">
-            <Link to={`/sites/${id}`}>
-                <h1>{name}</h1>
-            </Link>
-            <h3 className="pClass">Est: {established}</h3>
-            <img src={image} className="imageCircle"/>
-        </li>
-        </button>
+        <div className="callout container">
+            <div className="container__md_4 align-right">
+                <Link to={`/sites/${id}`}>
+                    <h1>{name}</h1>
+                <h3 className="pClass">Est: {established}</h3>
+                <img src={image} className="imageCircle"/>
+                </Link>
+            </div>
+        </div>
     );
 };
 
