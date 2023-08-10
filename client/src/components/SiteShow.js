@@ -9,10 +9,42 @@ const SiteShow = (props) => {
         description: "",
         setting: "",
         minimumAge: 0,
-        reviews: [],
         image: "",
         creatorUsername: "",
     });
+
+    const [reviews, setReviews] = useState([])
+
+    
+
+    // define your DELETE review fetch function up here, and then pass down to each review tile
+
+    const deleteReview = async (reviewId) => {
+        // DELETE FETCH
+        try {
+            const response = await fetch (`api/vi/reviews/${props.reviewId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(reviewId),
+        })
+        if (!response.ok) {
+            const error = new Error(`${response.status} ${response.statusText}`)
+            throw error
+        }
+        const responseBody = await response.json()
+        if(responseBody.delete) {
+            window.location.reload()
+        } else if(responseBody.error[0]){
+            console.error(`Error in Fetch: ${error.message}`);
+        }
+        }
+        catch(error) {
+            console.error(`Error in Fetch: ${error.message}`);
+        }
+    }
 
     const currentUser = props.user;
     const siteIdFromProps = props.match.params.id;
@@ -25,6 +57,7 @@ const SiteShow = (props) => {
             }
             const body = await response.json();
             setSite(body.site);
+            setReviews(body.site.reviews)
         } catch (error) {
             console.error(`Error in Fetch: ${error.message}`);
         }
@@ -39,8 +72,8 @@ const SiteShow = (props) => {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
 
-    const reviews = site.reviews.map((reviewObject) => {
-        return <ReviewTile key={reviewObject.id} {...reviewObject} />;
+    const reviewTiles = reviews.map((reviewObject) => {
+        return <ReviewTile key={reviewObject.id} {...reviewObject} deleteReview={deleteReview} user={props.user}/>;
     });
 
     let showReviewForm;
@@ -66,7 +99,7 @@ const SiteShow = (props) => {
                 {" "}
                 Reviews:
                 {showReviewForm}
-                {reviews}
+                {reviewTiles}
             </div>
             <h6>Contributed by: {site.creatorUsername}</h6>
         </div>

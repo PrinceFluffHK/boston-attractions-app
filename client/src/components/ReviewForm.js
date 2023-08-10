@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"
+import RatingOptions from "./RatingOptions.js";
 
 import translateServerErrors from "../services/translateServerErrors.js"
-
 
 const ReviewForm = (props) => {
     
@@ -69,10 +69,11 @@ const ReviewForm = (props) => {
     }
 
     return (
-        <div className="callout primary">
+        <div className="callout review-form">
             <h1>
                 Review Form
             </h1>
+            
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
                     Review:
@@ -83,17 +84,12 @@ const ReviewForm = (props) => {
                         value={newReview.textBody}
                         onChange={handleInputChange}
                     />
-                </label>
-                <label htmlFor="rating">
                     Rating:
-                    <input
-                        id="rating"
-                        type="text"
-                        name="rating"
-                        value={newReview.rating}
-                        onChange={handleInputChange}
-                    />
+                    <div>
+                          <RatingOptions handleInputChange={handleInputChange}/>
+                    </div>
                 </label>
+
                 <div className="button-group">
                     <Link to="/" className="button">
                         Back To List
