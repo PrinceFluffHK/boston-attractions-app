@@ -13,21 +13,16 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
         setVoteValue(netTotal)
     }
     
-    
     useEffect(() => {
         calculateNetVotes()
         votes.forEach(vote => {
             if (user) {
-                console.log("voterId", vote.voterId)
-                console.log("userid?", user.id)
                 if (vote.voterId === user.id) {
-                    console.log("found matching vote")
                     setHasVoted(true)
                 }
             }
         })
-        // checkIfVoted()
-    })
+    }, [])
     
     const addVote = async (value) => {
         try {
@@ -54,7 +49,6 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
     
     const handleUpVote = (event) => {
         event.preventDefault();
-        console.log(hasVoted)
         if (!hasVoted) {
             addVote(1);
         }
@@ -66,14 +60,27 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
             addVote(-1);
         }
     };
+
+    const VoteButtons = (props) => {
+        if (user) {
+            return(
+                <div>
+                    <button type="text" onClick={handleUpVote}>UpVote</button>
+                    <button type="text" onClick={handleDownVote}>DownVote</button>
+                </div>
+            )
+        } else {
+            return(<></>)
+        }
+    }
+    
     
     return (
         <div className="callout secondary">
             <p>{rating}/5 Stars!</p>
             <p>{textBody}</p>
             <p>{voteValue}</p>
-            <button type="text" onClick={handleUpVote}>UpVote</button>
-            <button type="text" onClick={handleDownVote}>DownVote</button>
+            <VoteButtons />
         </div>
     );
 };
