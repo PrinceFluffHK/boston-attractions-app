@@ -40,7 +40,7 @@ const SiteList = (props) => {
         );
     });
     return (
-        <div class="parchment">
+        <div className="parchment">
             <h1>Welcome to Boston!</h1>
             <Link to="/new-site">
                 <h4>Add New Historic Site</h4>

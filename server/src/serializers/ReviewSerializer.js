@@ -1,8 +1,7 @@
-// import Review from "../models/Review.js"
 import VoteSerializer from "./VoteSerializer.js";
 
 class ReviewSerializer {
-    static async getSummary(array) {
+    static async getSummary(array, user) {
         const serializedReviews = await Promise.all(
             array.map(async (review) => {
                 const requiredAttributes = ["textBody", "rating", "userId", "id"];
@@ -12,7 +11,22 @@ class ReviewSerializer {
                     serializedReview[attribute] = review[attribute];
                 }
                 const relatedVotes = await review.$relatedQuery("votes")
-                serializedReview.votes = VoteSerializer.getSummary(relatedVotes)
+
+                const reviewCreator = await review.$relatedQuery("user")
+                serializedReview.creatorName = reviewCreator.username
+
+                let netVoteValue = 0
+                serializedReview.votes = relatedVotes.map(vote => {
+                    const serializedVote = VoteSerializer.getDetails(vote, user)
+
+                    netVoteValue += serializedVote.voteValue
+                    if(serializedVote.voterId === user.id) {
+                        serializedReview.hasVoted = true
+                    } else {
+                        serializedReview.hasVoted = false
+                    }
+                })
+                serializedReview.netVoteValue = netVoteValue
 
                 return serializedReview;
             })

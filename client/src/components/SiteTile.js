@@ -9,7 +9,7 @@ const SiteTile = ({ name, setting, minimumAge, yearEstablished, id, image }) => 
     }
     return (
         <li>
-            <Link to={`/${id}`}>
+            <Link to={`/sites/${id}`}>
                 <h2>{name}</h2>
             </Link>
             <h3>Est: {established}</h3>

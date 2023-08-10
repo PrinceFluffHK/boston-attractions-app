@@ -2,27 +2,7 @@ import React, { useEffect, useState } from "react";
 import translateServerErrors from "../services/translateServerErrors.js";
 import VoteButtons from "./VoteButtons.js";
 
-const ReviewTile = ({ textBody, rating, votes, id, user }) => {
-    const [voteValue, setVoteValue] = useState(0);
-    const [hasVoted, setHasVoted] = useState(false);
-    
-    const voteInit = () => {
-        let netTotal = 0
-        votes.forEach(vote => {
-            netTotal += vote.voteValue
-            if (user) {
-                if (vote.voterId === user.id) {
-                    setHasVoted(true)
-                }
-            }
-        })
-        setVoteValue(netTotal)
-    }
-    
-    useEffect(() => {
-        voteInit()
-    }, [user])
-    
+const ReviewTile = ({ textBody, rating, id, user, netVoteValue, hasVoted, creatorName }) => {
     const addVote = async (value) => {
         try {
             const response = await fetch(`/api/v1/reviews/${id}`, {
@@ -37,19 +17,23 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
                 const error = new Error(errorMessage);
                 throw error;
             }
-            const newValue = voteValue + value
-            setVoteValue(newValue)
-            setHasVoted(true)
+            // const newValue = voteValue + value
+            // update state of reviews: find the review we voted and change its hasVoted status
+            netVoteValue += value;
+            hasVoted = true;
         } catch (error) {
-            console.error(`Error in fetch: ${error.message}`)
+            console.error(`Error in fetch: ${error.message}`);
         }
     };
+    // console.log("hasVoted", hasVoted);
     
     const handleUpVote = (event) => {
+        console.log("netVoteValue: ", netVoteValue);
         event.preventDefault();
         if (!hasVoted) {
             addVote(1);
         }
+        console.log("netVoteValue: ", netVoteValue);
     };
 
     const handleDownVote = (event) => {
@@ -63,8 +47,9 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
         <div className="callout secondary">
             <p>{rating}/5 Stars!</p>
             <p>{textBody}</p>
-            <p>{voteValue}</p>
-            <VoteButtons 
+            <p>By: {creatorName}</p>
+            <p>{netVoteValue}</p>
+            <VoteButtons
                 hasVoted={hasVoted}
                 handleDownVote={handleDownVote}
                 handleUpVote={handleUpVote}

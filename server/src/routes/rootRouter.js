@@ -12,4 +12,6 @@ rootRouter.use("/api/v1/users", usersRouter);
 rootRouter.use("/api/v1/sites", sitesRouter)
 rootRouter.use("/api/v1/reviews", reviewsRouter)
 
+rootRouter.use("/api/v1/sites", sitesRouter);
+
 export default rootRouter;

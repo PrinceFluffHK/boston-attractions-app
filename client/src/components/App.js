@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
-
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
@@ -10,7 +10,6 @@ import TopBar from "./layout/TopBar";
 import SiteList from "./SiteList";
 import SiteForm from "./SiteForm";
 import SiteShow from "./SiteShow";
-import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -31,11 +30,11 @@ const App = (props) => {
         <Router>
             <TopBar user={currentUser} />
             <Switch>
-            <Route exact path="/" component={SiteList}/>
-            <AuthenticatedRoute exact path="/new-site" component={SiteForm} user={currentUser}/>
-            <Route exact path="/:id" render={props => <SiteShow user={currentUser} {...props} /> } />
-            <Route exact path="/users/new" component={RegistrationForm} />
-            <Route exact path="/user-sessions/new" component={SignInForm} />
+                <Route exact path="/" component={SiteList} />
+                <Route exact path="/sites/:id" render={(props) => <SiteShow user={currentUser} {...props} /> } />
+                <AuthenticatedRoute exact path="/new-site" component={SiteForm} user={currentUser}/>
+                <Route exact path="/users/new" component={RegistrationForm} />
+                <Route exact path="/user-sessions/new" component={SignInForm} /> 
             </Switch>
         </Router>
     );

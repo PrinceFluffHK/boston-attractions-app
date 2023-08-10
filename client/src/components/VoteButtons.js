@@ -8,8 +8,8 @@ const VoteButtons = ({ user, hasVoted, handleDownVote, handleUpVote}) => {
         }
         return(
             <button type="text" onClick={handleUpVote} className={className}>UpVote</button>
-            ) 
-        }
+        ) 
+    }
 
     const DownVote = () => {
         let className = ""
@@ -20,7 +20,7 @@ const VoteButtons = ({ user, hasVoted, handleDownVote, handleUpVote}) => {
             <button type="text" onClick={handleDownVote} className={className}>DownVote</button>
         ) 
     }
-    
+
     if (user) {
         return(
             <div>

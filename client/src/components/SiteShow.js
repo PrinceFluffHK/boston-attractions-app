@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ReviewTile from "./ReviewTile.js"
+import ReviewTile from "./ReviewTile.js";
+import ReviewForm from "./ReviewForm.js";
 
 const SiteShow = (props) => {
     const [site, setSite] = useState({
@@ -9,11 +10,13 @@ const SiteShow = (props) => {
         setting: "",
         yearEstablished: "",
         minimumAge: 0,
-        reviews: [],
         image: "",
-        creatorUsername: ""
+        creatorUsername: "",
     });
 
+    const [reviews, setReviews] = useState([])
+    
+    const currentUser = props.user;
     const siteId = props.match.params.id;
 
     const getSite = async () => {
@@ -24,6 +27,7 @@ const SiteShow = (props) => {
             }
             const body = await response.json();
             setSite(body.site);
+            setReviews(body.site.reviews)
         } catch (error) {
             console.error(`Error in Fetch: ${error.message}`);
         }
@@ -38,7 +42,7 @@ const SiteShow = (props) => {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
 
-    const reviews = site.reviews.map(reviewObject => {
+    const reviewList = reviews.map(reviewObject => {
         return (
             <ReviewTile
                 key={reviewObject.id}
@@ -47,20 +51,37 @@ const SiteShow = (props) => {
             />
         )
     })
+
+    let showReviewForm;
+    if(currentUser) {
+        showReviewForm =
+        <ReviewForm
+            site={site}
+            user={props.user}
+            setSite={setSite}
+            setReviews={setReviews}
+            reviews={reviews}
+        />
+    } else {
+        showReviewForm = <h4>Please Sign Up, or Sign In, To Contribute A Review To {site.name}</h4>
+    }
+
     return (
-        <div className="parchment">
-            <div className="col1">
+        <div className="parchment col1">
+            <div className="">
                 <h1>{site.name}</h1>
                 <h2>Est: {site.yearEstablished}</h2>
                 <h3>Location: {site.address}</h3>
                 <p>Setting: {site.setting}</p>
                 <p>{displayAge}</p>
                 <p>{site.description}</p>
+                <h6>Contributed by: {site.creatorUsername}</h6>
             </div>
-            <div className="col1"> Reviews:
-                {reviews}
+            <div className="callout secondary">
+                Reviews:
+                {showReviewForm}
+                {reviewList}
             </div>
-            <h6>Contributed by: {site.creatorUsername}</h6>
         </div>
     );
 };
