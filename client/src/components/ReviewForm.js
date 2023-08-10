@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import translateServerErrors from "../services/translateServerErrors.js"
 
 
-const ReviewForm = (props) => {
+const ReviewForm = (props, {currentUser}) => {
     
     const [newReview, setNewReview] = useState({
         textBody: "",
@@ -52,7 +52,6 @@ const ReviewForm = (props) => {
     }
     
 
-    const currentUser = props.currentUser
 
     const handleSubmit = (event) => {
         event.preventDefault()
