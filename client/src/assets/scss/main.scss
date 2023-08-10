@@ -34,7 +34,42 @@ h1 {
   cursor: pointer;
 }
 
-.col1 {
-  display: flex;
-  flex-basis: (100 / 4 ) * 1%;
+$grid__bp--md: 768;
+$grid__cols: 12;
+.container {
+
+  max-width: $grid__bp--md * 1px;
+  margin: 0 auto;
+  &--fluid {
+    margin: 0;
+    max-width: 100%;
+  }
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  @for $i from 1 through $grid__cols {
+    &__col-sm-#{$i} {
+      flex-basis: (100 / ($grid__cols / $i) ) * 1%;
+    }
+  }
+    @for $i from 1 through $grid__cols {
+      &__col-md-#{$i} {
+        flex-basis: (100 / ($grid__cols / $i) ) * 1%;
+      }
+    }
+}
+
+.align-right {
+  text-align: right;
+}
+
+
+.stone {
+  background-color:rgb(0,0,0);
+  background-image:url(http://www.zingerbugimages.com/backgrounds/brown_marble_background_seamless.jpg);
+  background-position:top left;
+  background-repeat:repeat;
+  background-attachment:fixed;
 }
