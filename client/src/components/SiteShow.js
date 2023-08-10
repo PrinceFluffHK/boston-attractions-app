@@ -43,6 +43,18 @@ const SiteShow = (props) => {
         return <ReviewTile key={reviewObject.id} {...reviewObject} />;
     });
 
+    let showReviewForm;
+    if(currentUser) {
+        showReviewForm =
+        <ReviewForm
+            site={site}
+            currentUser={currentUser}
+            setSite={setSite}
+        />
+    } else {
+        showReviewForm = <h4>Please Sign Up, or Sign In, To Contribute A Review To {site.name}</h4>
+    }
+
     return (
         <div className="callout">
             <h1>{site.name}</h1>
@@ -53,7 +65,7 @@ const SiteShow = (props) => {
             <div className="callout secondary">
                 {" "}
                 Reviews:
-                <ReviewForm site={site} currentUser={currentUser} setSite={setSite} />
+                {showReviewForm}
                 {reviews}
             </div>
             <h6>Contributed by: {site.creatorUsername}</h6>

@@ -3,19 +3,21 @@ import { Link } from "react-router-dom"
 
 import translateServerErrors from "../services/translateServerErrors.js"
 
-const ReviewForm = (props) => {
 
+const ReviewForm = (props) => {
+    
     const [newReview, setNewReview] = useState({
         textBody: "",
         rating: ""
     })
-
+    
     const [errors, setErrors] = useState({})
     const site = props.site
 
+    
     const addNewReview = async (formData) => {
         try {
-            const response = await fetch(`/api/v1/sites/${site.id}`, {
+            const response = await fetch(`/api/v1/sites/${site.id}/reviews`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",
@@ -49,12 +51,6 @@ const ReviewForm = (props) => {
         })
     }
     
-    const clearForm = () => {
-        setNewReview({
-            textBody: "",
-            rating: ""
-        })
-    }
 
     const currentUser = props.currentUser
 
@@ -65,10 +61,17 @@ const ReviewForm = (props) => {
         }
     }
 
+    const clearForm = () => {
+        setNewReview({
+            textBody: "",
+            rating: ""
+        })
+    }
+
     return (
         <div className="callout primary">
             <h1>
-                Review Form :D
+                Review Form
             </h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
@@ -92,7 +95,7 @@ const ReviewForm = (props) => {
                     />
                 </label>
                 <div className="button-group">
-                    <Link to={`/`} className="button">
+                    <Link to="/" className="button">
                         Back To List
                     </Link>
                     <input className="button" type="button" value="Clear Review Form" onClick={clearForm} />
