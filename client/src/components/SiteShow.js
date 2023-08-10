@@ -39,11 +39,11 @@ const SiteShow = (props) => {
     }
 
     const reviews = site.reviews.map(reviewObject => {
-        console.log(reviewObject)
         return (
             <ReviewTile
                 key={reviewObject.id}
                 {...reviewObject}
+                user={props.user}
             />
         )
     })

@@ -11,11 +11,7 @@ class ReviewSerializer {
                 for (let attribute of requiredAttributes) {
                     serializedReview[attribute] = review[attribute];
                 }
-                // console.log(serializedReview)
-
-                // const relatedVotes = await Review.$relatedQuery("votes").where()
                 const relatedVotes = await review.$relatedQuery("votes")
-                console.log(relatedVotes)
                 serializedReview.votes = VoteSerializer.getSummary(relatedVotes)
 
                 return serializedReview;

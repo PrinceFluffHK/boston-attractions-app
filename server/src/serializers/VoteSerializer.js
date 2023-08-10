@@ -1,7 +1,7 @@
 class VoteSerializer {
     static getSummary(array) {
         const serializedVotes = array.map((vote) => {
-            const requiredAttributes = ["voteValue"];
+            const requiredAttributes = ["voteValue", "voterId"];
 
             let serializedVote = {};
             for (let attribute of requiredAttributes) {

@@ -29,7 +29,6 @@ class SiteSerializer {
         serializedSite.creatorUsername = await user.username
         const reviews = await site.$relatedQuery("reviews");
         serializedSite.reviews = await ReviewSerializer.getSummary(reviews)
-        console.log("serializedSite", serializedSite)
         
         return serializedSite
     }

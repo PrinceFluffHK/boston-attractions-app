@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import translateServerErrors from "../services/translateServerErrors.js";
 
-const ReviewTile = ({ textBody, rating, votes, id }) => {
+const ReviewTile = ({ textBody, rating, votes, id, user }) => {
     const [voteValue, setVoteValue] = useState(0);
     const [hasVoted, setHasVoted] = useState(false);
     
@@ -13,14 +13,21 @@ const ReviewTile = ({ textBody, rating, votes, id }) => {
         setVoteValue(netTotal)
     }
     
-    const checkIfVoted = () => {
-        //
-    }
     
-    // useEffect(() => {
-    //     calculateNetVotes()
-    //     checkIfVoted()
-    // })
+    useEffect(() => {
+        calculateNetVotes()
+        votes.forEach(vote => {
+            if (user) {
+                console.log("voterId", vote.voterId)
+                console.log("userid?", user.id)
+                if (vote.voterId === user.id) {
+                    console.log("found matching vote")
+                    setHasVoted(true)
+                }
+            }
+        })
+        // checkIfVoted()
+    })
     
     const addVote = async (value) => {
         try {
@@ -36,7 +43,9 @@ const ReviewTile = ({ textBody, rating, votes, id }) => {
                 const error = new Error(errorMessage);
                 throw error;
             }
-            setVoteValue(voteValue + value)
+            console.log("incrementing...", voteValue, value)
+            const newValue = voteValue + value
+            setVoteValue(newValue)
             setHasVoted(true)
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -45,13 +54,17 @@ const ReviewTile = ({ textBody, rating, votes, id }) => {
     
     const handleUpVote = (event) => {
         event.preventDefault();
-        addVote(1);
+        console.log(hasVoted)
+        if (!hasVoted) {
+            addVote(1);
+        }
     };
 
     const handleDownVote = (event) => {
         event.preventDefault();
-        addVote(-1);
-
+        if (!hasVoted) {
+            addVote(-1);
+        }
     };
     
     return (

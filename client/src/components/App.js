@@ -33,7 +33,7 @@ const App = (props) => {
             <Switch>
             <Route exact path="/" component={SiteList}/>
             <AuthenticatedRoute exact path="/new-site" component={SiteForm} user={currentUser}/>
-            <Route exact path="/:id" component={SiteShow} />
+            <Route exact path="/:id" render={props => <SiteShow user={currentUser} {...props} /> } />
             <Route exact path="/users/new" component={RegistrationForm} />
             <Route exact path="/user-sessions/new" component={SignInForm} />
             </Switch>
