@@ -35,9 +35,10 @@ const ReviewForm = (props) => {
                 }
             } else {
                 const responseBody = await response.json()
-                const reviewData = site.reviews.concat(responseBody.newReview)
+                const reviewData = props.reviews.concat(responseBody.newReview)
                 setErrors({})
-                props.setSite({ ...site, reviews: reviewData })
+                // props.setSite({ ...site, reviews: reviewData })
+                props.setReviews(reviewData)
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -52,13 +53,13 @@ const ReviewForm = (props) => {
     }
     
 
-    const currentUser = props.currentUser
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (currentUser) {
+        if (props.user) {
             addNewReview(newReview)
         }
+        clearForm()
     }
 
     const clearForm = () => {

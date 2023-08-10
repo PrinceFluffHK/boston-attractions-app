@@ -8,6 +8,7 @@ const SiteShow = (props) => {
         address: "",
         description: "",
         setting: "",
+        yearEstablished: "",
         minimumAge: 0,
         image: "",
         creatorUsername: "",
@@ -47,11 +48,11 @@ const SiteShow = (props) => {
     }
 
     const currentUser = props.user;
-    const siteIdFromProps = props.match.params.id;
+    const siteId = props.match.params.id;
 
     const getSite = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/${siteIdFromProps}`);
+            const response = await fetch(`/api/v1/sites/${siteId}`);
             if (!response.ok) {
                 throw new Error(`${response.status} (${response.statusText})`);
             }
@@ -72,36 +73,50 @@ const SiteShow = (props) => {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
 
-    const reviewTiles = reviews.map((reviewObject) => {
-        return <ReviewTile key={reviewObject.id} {...reviewObject} deleteReview={deleteReview} user={props.user}/>;
-    });
+    const reviewList = reviews.map(reviewObject => {
+        return (
+            <ReviewTile
+                key={reviewObject.id}
+                {...reviewObject}
+                user={props.user}
+                setReviews={setReviews}
+                deleteReview={deleteReview}
+            />
+        )
+    })
 
     let showReviewForm;
     if(currentUser) {
         showReviewForm =
         <ReviewForm
             site={site}
-            currentUser={currentUser}
+            user={props.user}
             setSite={setSite}
+            setReviews={setReviews}
+            reviews={reviews}
         />
     } else {
-        showReviewForm = <h4>Please Sign Up, or Sign In, To Contribute A Review To {site.name}</h4>
+        showReviewForm = <h4>Please Sign Up or Sign In To Contribute A Review To {site.name}</h4>
     }
 
     return (
-        <div className="callout">
+        <div className="parchment">
             <h1>{site.name}</h1>
-            <h3>{site.address}</h3>
-            <p>{site.description}</p>
-            <p>{site.setting}</p>
-            <p>{displayAge}</p>
-            <div className="callout secondary">
-                {" "}
-                Reviews:
-                {showReviewForm}
-                {reviewTiles}
+            <div className="col1">
+                <div >
+                    <h2>Est: {site.yearEstablished}</h2>
+                    <h3>Location: {site.address}</h3>
+                    <p>Setting: {site.setting}</p>
+                    <p>{displayAge}</p>
+                    <p>{site.description}</p>
+                    <h6>Contributed by: {site.creatorUsername}</h6>
+                </div>
+                <div className="callout secondary">
+                    Reviews:
+                    {showReviewForm}
+                    {reviewList}
+                </div>
             </div>
-            <h6>Contributed by: {site.creatorUsername}</h6>
         </div>
     );
 };
