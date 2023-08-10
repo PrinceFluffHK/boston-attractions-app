@@ -72,6 +72,7 @@ const SiteShow = (props) => {
             <h1>{site.name}</h1>
             <div className="col1">
                 <div >
+                    <img src={site.image} alt={site.description} />
                     <h2>Est: {site.yearEstablished}</h2>
                     <h3>Location: {site.address}</h3>
                     <p>Setting: {site.setting}</p>

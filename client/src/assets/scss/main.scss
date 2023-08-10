@@ -18,6 +18,11 @@ h1 {
   font-family: 'Papyrus'
 }
 
+.pClass {
+  text-align: end;
+  font-family: 'Papyrus'
+}
+
 .parchment {
   position: absolute;
   width: 98%;
@@ -28,6 +33,12 @@ h1 {
     box-shadow: 4px 3px 20px black, 0 0 60px #8a4d0f inset;
     background: #fffef0;
   filter: url(#wavy2);
+}
+
+.imageCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
 }
 
 #button {
