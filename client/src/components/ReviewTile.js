@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 import translateServerErrors from "../services/translateServerErrors.js";
+import VoteButtons from "./VoteButtons.js";
 
 const ReviewTile = ({ textBody, rating, votes, id, user }) => {
     const [voteValue, setVoteValue] = useState(0);
     const [hasVoted, setHasVoted] = useState(false);
     
-    const calculateNetVotes = () => {
+    const voteInit = () => {
         let netTotal = 0
         votes.forEach(vote => {
             netTotal += vote.voteValue
-        })
-        setVoteValue(netTotal)
-    }
-    
-    useEffect(() => {
-        calculateNetVotes()
-        votes.forEach(vote => {
             if (user) {
+                console.log(vote.voterId, user.id)
                 if (vote.voterId === user.id) {
                     setHasVoted(true)
                 }
             }
         })
-    }, [])
+        setVoteValue(netTotal)
+    }
+    
+    useEffect(() => {
+        voteInit()
+    }, [user])
     
     const addVote = async (value) => {
         try {
@@ -38,7 +38,6 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
                 const error = new Error(errorMessage);
                 throw error;
             }
-            console.log("incrementing...", voteValue, value)
             const newValue = voteValue + value
             setVoteValue(newValue)
             setHasVoted(true)
@@ -61,26 +60,17 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
         }
     };
 
-    const VoteButtons = (props) => {
-        if (user) {
-            return(
-                <div>
-                    <button type="text" onClick={handleUpVote}>UpVote</button>
-                    <button type="text" onClick={handleDownVote}>DownVote</button>
-                </div>
-            )
-        } else {
-            return(<></>)
-        }
-    }
-    
-    
     return (
         <div className="callout secondary">
             <p>{rating}/5 Stars!</p>
             <p>{textBody}</p>
             <p>{voteValue}</p>
-            <VoteButtons />
+            <VoteButtons 
+                hasVoted={hasVoted}
+                handleDownVote={handleDownVote}
+                handleUpVote={handleUpVote}
+                user={user}
+            />
         </div>
     );
 };
