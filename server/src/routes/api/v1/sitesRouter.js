@@ -2,6 +2,7 @@ import express from "express";
 import uploadImage from "../../../services/uploadImage.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import { Site } from "../../../models/index.js";
+import siteReviewsRouter from "./siteReviewsRouter.js"
 import { ValidationError } from "objection";
 import SiteSerializer from "../../../serializers/SiteSerializer.js"
 
@@ -49,5 +50,7 @@ sitesRouter.get("/:id", async (req, res) => {
         return res.status(500).json({ errors: error });
     }
 });
+
+sitesRouter.use("/:siteId/reviews", siteReviewsRouter)
 
 export default sitesRouter;

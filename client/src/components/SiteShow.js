@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ReviewTile from "./ReviewTile.js"
+import ReviewTile from "./ReviewTile.js";
+import ReviewForm from "./ReviewForm.js";
 
 const SiteShow = (props) => {
     const [site, setSite] = useState({
@@ -10,14 +11,15 @@ const SiteShow = (props) => {
         minimumAge: 0,
         reviews: [],
         image: "",
-        creatorUsername: ""
+        creatorUsername: "",
     });
 
-    const siteId = props.match.params.id;
+    const currentUser = props.user;
+    const siteIdFromProps = props.match.params.id;
 
     const getSite = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/${siteId}`);
+            const response = await fetch(`/api/v1/sites/${siteIdFromProps}`);
             if (!response.ok) {
                 throw new Error(`${response.status} (${response.statusText})`);
             }
@@ -37,14 +39,22 @@ const SiteShow = (props) => {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
 
-    const reviews = site.reviews.map(reviewObject => {
-        return (
-            <ReviewTile
-                key={reviewObject.id}
-                {...reviewObject}
-            />
-        )
-    })
+    const reviews = site.reviews.map((reviewObject) => {
+        return <ReviewTile key={reviewObject.id} {...reviewObject} />;
+    });
+
+    let showReviewForm;
+    if(currentUser) {
+        showReviewForm =
+        <ReviewForm
+            site={site}
+            currentUser={currentUser}
+            setSite={setSite}
+        />
+    } else {
+        showReviewForm = <h4>Please Sign Up, or Sign In, To Contribute A Review To {site.name}</h4>
+    }
+
     return (
         <div className="callout">
             <h1>{site.name}</h1>
@@ -52,7 +62,9 @@ const SiteShow = (props) => {
             <p>{site.description}</p>
             <p>{site.setting}</p>
             <p>{displayAge}</p>
-            <div className="callout secondary"> Reviews:
+            <div className="callout secondary">
+                Reviews:
+                {showReviewForm}
                 {reviews}
             </div>
             <h6>Contributed by: {site.creatorUsername}</h6>

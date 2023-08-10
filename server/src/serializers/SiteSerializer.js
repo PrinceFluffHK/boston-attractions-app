@@ -15,7 +15,7 @@ class SiteSerializer {
     }
 
     static async getInfo(site) {
-        const requiredAttributes = ["name", "address", "description", "setting", "image", "minimumAge"]
+        const requiredAttributes = ["name", "address", "description", "setting", "image", "minimumAge", "id"]
         
         let serializedSite = {}
         for(let attribute of requiredAttributes) {
