@@ -11,7 +11,6 @@ const ReviewTile = ({ textBody, rating, votes, id, user }) => {
         votes.forEach(vote => {
             netTotal += vote.voteValue
             if (user) {
-                console.log(vote.voterId, user.id)
                 if (vote.voterId === user.id) {
                     setHasVoted(true)
                 }

@@ -48,14 +48,16 @@ const SiteShow = (props) => {
         )
     })
     return (
-        <div className="callout">
-            <h1>{site.name}</h1>
-            <h2>Est: {site.yearEstablished}</h2>
-            <h3>Location: {site.address}</h3>
-            <p>Setting: {site.setting}</p>
-            <p>{displayAge}</p>
-            <p>{site.description}</p>
-            <div className="callout secondary"> Reviews:
+        <div className="parchment">
+            <div className="col1">
+                <h1>{site.name}</h1>
+                <h2>Est: {site.yearEstablished}</h2>
+                <h3>Location: {site.address}</h3>
+                <p>Setting: {site.setting}</p>
+                <p>{displayAge}</p>
+                <p>{site.description}</p>
+            </div>
+            <div className="col1"> Reviews:
                 {reviews}
             </div>
             <h6>Contributed by: {site.creatorUsername}</h6>

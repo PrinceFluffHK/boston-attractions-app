@@ -13,13 +13,12 @@
   tab-size: 4;
 }
 
-<<<<<<< HEAD
 h1 {
   text-align: center;
   font-family: 'Papyrus'
 }
 
-#parchment {
+.parchment {
   position: absolute;
   width: 98%;
   min-height: calc((1vw + 1vh) * 75);
@@ -30,8 +29,12 @@ h1 {
     background: #fffef0;
   filter: url(#wavy2);
 }
-=======
+
 #button {
   cursor: pointer;
 }
->>>>>>> 68701feda105c77df9f57f2e31ae3329372c3c81
+
+.col1 {
+  display: flex;
+  flex-basis: (100 / 2 ) * 1%;
+}
