@@ -22,24 +22,18 @@ const SiteShow = (props) => {
     const deleteReview = async (reviewId) => {
         // DELETE FETCH
         try {
-            const response = await fetch (`api/vi/reviews/${props.reviewId}`, {
+            const response = await fetch (`/api/v1/reviews/${reviewId}`, {
                 method: "DELETE",
                 headers: {
-                    "Content-Type": "application/json",
                     Accept: "application/json",
                 },
-                body: JSON.stringify(reviewId),
         })
         if (!response.ok) {
             const error = new Error(`${response.status} ${response.statusText}`)
             throw error
         }
-        const responseBody = await response.json()
-        if(responseBody.delete) {
-            window.location.reload()
-        } else if(responseBody.error[0]){
-            console.error(`Error in Fetch: ${error.message}`);
-        }
+        const updatedReviews = reviews.filter(review => review.id !== reviewId);
+            setReviews(updatedReviews);
         }
         catch(error) {
             console.error(`Error in Fetch: ${error.message}`);

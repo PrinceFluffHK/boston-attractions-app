@@ -1,5 +1,5 @@
 import React from "react";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
+
 
 const RatingOptions = ({handleInputChange}) => {
     

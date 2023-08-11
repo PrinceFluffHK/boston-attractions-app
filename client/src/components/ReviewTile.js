@@ -9,7 +9,7 @@ const ReviewTile = (props) => {
     const handleDeleteClick = (event) => {
         event.preventDefault()
         if(window.confirm("Are you sure you want to delete this review?")){
-            deleteReview(props.review)
+            props.deleteReview(props.id)
         }
     }
 
