@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"
 import RatingOptions from "./RatingOptions.js";
 
 import translateServerErrors from "../services/translateServerErrors.js"
@@ -14,7 +13,6 @@ const ReviewForm = (props) => {
     const [errors, setErrors] = useState({})
     const site = props.site
 
-    
     const addNewReview = async (formData) => {
         try {
             const response = await fetch(`/api/v1/sites/${site.id}/reviews`, {
@@ -37,7 +35,6 @@ const ReviewForm = (props) => {
                 const responseBody = await response.json()
                 const reviewData = props.reviews.concat(responseBody.newReview)
                 setErrors({})
-                // props.setSite({ ...site, reviews: reviewData })
                 props.setReviews(reviewData)
             }
         } catch (error) {
@@ -52,13 +49,9 @@ const ReviewForm = (props) => {
         })
     }
     
-
-
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (props.user) {
-            addNewReview(newReview)
-        }
+        addNewReview(newReview)
         clearForm()
     }
 
@@ -71,31 +64,30 @@ const ReviewForm = (props) => {
 
     return (
         <div className="callout review-form">
-            <h1>
-                Review Form
-            </h1>
-            
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
-                    Review:
+                    <h3>
+                        Write a Review:
+                    </h3>
                     <input
                         id="textBody"
                         type="text"
                         name="textBody"
                         value={newReview.textBody}
                         onChange={handleInputChange}
-                    />
-                    Rating:
+                        />
+                    <h3>
+                        Rating:
+                    </h3>
                     <div>
-                          <RatingOptions handleInputChange={handleInputChange}/>
+                        <RatingOptions 
+                            setNewReview={setNewReview}
+                            newReview={newReview}
+                        />
                     </div>
                 </label>
-
                 <div className="button-group">
-                    <Link to="/" className="button">
-                        Back To List
-                    </Link>
-                    <input className="button" type="button" value="Clear Review Form" onClick={clearForm} />
+                    <input className="button" type="button" value="Clear Review" onClick={clearForm} />
                     <input className="button" type="submit" value="Submit Review" />
                 </div>
             </form>

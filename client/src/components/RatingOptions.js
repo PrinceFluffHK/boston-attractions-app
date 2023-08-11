@@ -1,38 +1,35 @@
 import React from "react";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
 
-const RatingOptions = ({handleInputChange}) => {
-    
-    const ratings = [1, 2, 3, 4, 5]
+const RatingOptions = ({ setNewReview, newReview }) => {
+    const ratings = [1, 2, 3, 4, 5];
+
+    const handleInputChange = (event) => {
+        setNewReview({
+            ...newReview,
+            [event.currentTarget.name]: event.currentTarget.value
+        })
+    }
 
     const ratingOptions = ratings.map((rating) => {
-        
         return (
-            <>
-                <label htmlFor={`rating-${rating}`} className="rating-options">
-                
-                    <input
+            <label key={rating} htmlFor={`rating-${rating}`} className="rating-options container__col-md-1">
+                <input
                     className="radio-button"
-                    key={rating.id}
                     id={`rating-${rating}`}
                     type="radio"
                     name="rating"
                     value={rating}
-                    checked={parseInt(rating) === rating}
                     onChange={handleInputChange}
                 />
                 {rating}
-                </label>
-            </>
-        )
-    })
+            </label>
+        );
+    });
     return(
-        <>
+        <div className="container__row">
             {ratingOptions}
-        </>
+        </div>
+    ) 
+};
 
-    )
-}
-
-
-export default RatingOptions
+export default RatingOptions;

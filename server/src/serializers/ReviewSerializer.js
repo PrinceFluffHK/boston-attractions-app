@@ -17,7 +17,7 @@ class ReviewSerializer {
 
                 let netVoteValue = 0
                 serializedReview.votes = relatedVotes.map(vote => {
-                    const serializedVote = VoteSerializer.getDetails(vote, user)
+                    const serializedVote = VoteSerializer.getDetails(vote)
 
                     netVoteValue += serializedVote.voteValue
                     serializedReview.hasVoted = false
@@ -26,6 +26,7 @@ class ReviewSerializer {
                             serializedReview.hasVoted = true
                         }
                     }
+                    return serializedVote
                 })
                 serializedReview.netVoteValue = netVoteValue
 

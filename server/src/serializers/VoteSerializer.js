@@ -1,5 +1,5 @@
 class VoteSerializer {
-    static getDetails(vote, user) {
+    static getDetails(vote) {
         const requiredAttributes = ["voteValue", "voterId"];
 
         let serializedVote = {};
