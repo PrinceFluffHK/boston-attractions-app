@@ -16,7 +16,8 @@ In this app, users can:
 - view details about a site, including a list of reviews submitted by other users.
 - add a review to a site, along with a rating. Users who are not signed in cannot add a review.
 - up-vote and down-vote reviews. They can only up-vote or down-vote a review once.
-- delete reviews that they have made themselves.
+- [WIP] delete reviews that they have made themselves
+-- NOTE: reviews with votes cannot currently be deleted
 
 Technologies used in the site include:
 - React framework
