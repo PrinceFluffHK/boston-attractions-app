@@ -34,10 +34,10 @@ const SiteShow = (props) => {
         }
     };
 
-    const setReviewHandler = (targetId) => {
+    const setReviewHandler = (targetId, value) => {
         const modReviews = reviews.map((review) => {
             if (review.id === targetId) {
-                review.netVoteValue = review.netVoteValue + 1;
+                review.netVoteValue = review.netVoteValue + value;
                 review.hasVoted = true
             }
             return review;

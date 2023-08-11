@@ -25,7 +25,7 @@ const ReviewTile = ({
                 const error = new Error(errorMessage);
                 throw error;
             }
-            setReviewHandler(id)
+            setReviewHandler(id, value)
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`);
         }
