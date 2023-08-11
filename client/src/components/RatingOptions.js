@@ -7,7 +7,7 @@ const RatingOptions = ({ handleInputChange }) => {
                 <label htmlFor={`rating-${rating}`} className="rating-options">
                     <input
                         className="radio-button"
-                        key={rating.id}
+                        key={rating}
                         id={`rating-${rating}`}
                         type="radio"
                         name="rating"

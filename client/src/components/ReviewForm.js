@@ -86,7 +86,7 @@ const ReviewForm = (props, {currentUser}) => {
                     />
                     Rating:
                     <div>
-                          <RatingOptions handleInputChange={handleInputChange}/>
+                          <RatingOptions  handleInputChange={handleInputChange}/>
                     </div>
                 </label>
 
