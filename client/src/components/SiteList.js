@@ -42,9 +42,11 @@ const SiteList = (props) => {
     return (
         <div className="parchment">
             <h1>Welcome to Boston!</h1>
-            <Link to="/new-site">
-                <h4>Add New Historic Site</h4>
-            </Link>
+            <div>
+                <Link to="/new-site" className="button">
+                    <h4>Add New Historic Site</h4>
+                </Link>
+            </div>
             <ul>{sitesToRender}</ul>
         </div>
     );

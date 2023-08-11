@@ -37,7 +37,6 @@ const ReviewForm = (props) => {
                 const responseBody = await response.json()
                 const reviewData = props.reviews.concat(responseBody.newReview)
                 setErrors({})
-                // props.setSite({ ...site, reviews: reviewData })
                 props.setReviews(reviewData)
             }
         } catch (error) {
@@ -71,9 +70,9 @@ const ReviewForm = (props) => {
 
     return (
         <div className="callout primary">
-            <h1>
+            <h2>
                 Review Form
-            </h1>
+            </h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
                     Review:
@@ -96,10 +95,7 @@ const ReviewForm = (props) => {
                     />
                 </label>
                 <div className="button-group">
-                    <Link to="/" className="button">
-                        Back To List
-                    </Link>
-                    <input className="button" type="button" value="Clear Review Form" onClick={clearForm} />
+                    <input className="button" type="button" value="Clear Review" onClick={clearForm} />
                     <input className="button" type="submit" value="Submit Review" />
                 </div>
             </form>
