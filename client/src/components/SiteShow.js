@@ -52,7 +52,7 @@ const SiteShow = (props) => {
 
     const getSite = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/${siteId}`);
+            const response = await fetch(`/api/v1/sites/${siteIdFromProps}`);
             if (!response.ok) {
                 throw new Error(`${response.status} (${response.statusText})`);
             }
