@@ -45,7 +45,6 @@ sitesRouter.get("/:id", async (req, res) => {
     try {
         const site = await Site.query().findById(id);
         const serializedSite = await SiteSerializer.getInfo(site, req.user)
-        console.log("Image URL to aws link included?", serializedSite)
         return res.status(200).json({ site: serializedSite });
     } catch (error) {
         return res.status(500).json({ errors: error });

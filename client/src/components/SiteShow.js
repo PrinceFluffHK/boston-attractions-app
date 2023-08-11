@@ -79,16 +79,21 @@ const SiteShow = (props) => {
         showReviewForm = <h4>Please Sign Up or Sign In to contribute a review</h4>
     }
 
+    let yearEstablished = `Est: ${site.yearEstablished}`
+    if (site.yearEstablished === 0) {
+        yearEstablished = ""
+    }
+
     return (
         <div className="parchment">
             <h1>{site.name}</h1>
             <div className="container__row">
                 <div className="container__col-md-5">
                     <img src={site.image} alt={site.description} className="image-border"/>
-                    <h2>Est: {site.yearEstablished}</h2>
+                    <h2>{yearEstablished}</h2>
                     <h3>Address: {site.address}</h3>
-                    <p>Setting: {site.setting}</p>
-                    <p>{displayAge}</p>
+                    <h3>Setting: {site.setting}</h3>
+                    <h3>{displayAge}</h3>
                     <p>{site.description}</p>
                     <p className="small-gray">Contributed by: {site.creatorUsername}</p >
                 </div>
