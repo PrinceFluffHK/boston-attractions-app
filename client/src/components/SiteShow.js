@@ -122,13 +122,13 @@ const SiteShow = (props) => {
                 <div className="container__col-md-5">
                     <img src={site.image} alt={site.description} className="image-border"/>
                     <h2>{yearEstablished}</h2>
-                    <h3>Address: {site.address}</h3>
-                    <h3>Setting: {site.setting}</h3>
-                    <h3>{displayAge}</h3>
+                    <h4>Address: {site.address}</h4>
+                    <h4>Setting: {site.setting}</h4>
+                    <h4>{displayAge}</h4>
                     <p>{site.description}</p>
                     <p className="small-gray">Contributed by: {site.creatorUsername}</p >
                 </div>
-                <div className="callout secondary container__col-md-6 align-right container__col-offset-1">
+                <div className="container__col-md-6 align-right container__col-offset-1">
                     {showReviewForm}
                     {reviewList}
                 </div>

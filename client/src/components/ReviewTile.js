@@ -58,10 +58,10 @@ const ReviewTile = ({
     }
 
     return (
-        <div className="callout primary container review-tile">
+        <div className="callout container review-tile">
             <div className="container__row">
-                <p className="container__col-md-6">{showRating(rating)}</p>
-                <div className="container__col-md-6" >
+                <p className="container__col-md-8">{showRating(rating)}</p>
+                <div className="container__col-md-4" >
                     <div className="container">
                         <VoteButtons    
                             hasVoted={hasVoted}

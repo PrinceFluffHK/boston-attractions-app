@@ -115,7 +115,6 @@ $map-grid-props: (
     }
 }
 .container {
-    // max-width: $grid__bp-md * 1px;
     max-width: 45%;
     margin: 0 auto;
     &--fluid {
@@ -153,8 +152,6 @@ $map-grid-props: (
 }
 
 .review-tile {
-    background-color: #add8e6;
-    color: #add8e6;
     max-width: 100%;
 }
 

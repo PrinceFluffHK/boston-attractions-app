@@ -63,18 +63,19 @@ const ReviewForm = (props) => {
     }
 
     return (
-        <div className="callout primary review-form">
+        <div className="review-form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
                     <h3>
                         Write a Review:
                     </h3>
-                    <input
+                    <textarea
                         id="textBody"
                         type="text"
                         name="textBody"
                         value={newReview.textBody}
                         onChange={handleInputChange}
+                        rows={5}
                         />
                     <h3>
                         Rating:
