@@ -47,9 +47,8 @@ const SiteList = (props) => {
                     <h4>Add New Historic Site</h4>
                 </Link>
             </div>
-            <div className="container">
-                <div>{sitesToRender}</div>
-
+            <div className="grid-x align-left-middle">
+                {sitesToRender}
             </div>
         </div>
     );

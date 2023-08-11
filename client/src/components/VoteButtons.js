@@ -13,7 +13,7 @@ const VoteButtons = ({ user, hasVoted, handleDownVote, handleUpVote, netVoteValu
         }
         return(
             <div className="container__col-md-4">
-                <i class={classSet} onClick={handleUpVote}></i>
+                <i className={classSet} onClick={handleUpVote}></i>
             </div>
         ) 
     }
@@ -25,7 +25,7 @@ const VoteButtons = ({ user, hasVoted, handleDownVote, handleUpVote, netVoteValu
         }
         return(
             <div className="container__col-md-1">
-                <i class={classSet} onClick={handleDownVote}></i>
+                <i className={classSet} onClick={handleDownVote}></i>
             </div>
         ) 
     }

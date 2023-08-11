@@ -11,7 +11,6 @@
 :root {
     -moz-tab-size: 4;
     tab-size: 4;
-
 }
 
 h1,
@@ -55,13 +54,19 @@ label {
 }
 
 .imageCircle {
+    object-fit: cover;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
+    border-radius: 100px;
 }
 
 #button {
     cursor: pointer;
+}
+
+.radio-button {
+    font-family: "FontAwesome";
+    list-style: "fa-star";
 }
 
 .align-right {
@@ -111,7 +116,7 @@ $map-grid-props: (
     }
 }
 .container {
-    max-width: $grid__bp-md * 1px;
+    max-width: 90%;
     margin: 0 auto;
     &--fluid {
         margin: 0;
@@ -147,6 +152,11 @@ $map-grid-props: (
     width: 10px;
 }
 
-.full-span {
-    width: 100%;
+.review-tile {
+    max-width: 100%;
+}
+
+.site-title {
+    font-size: 4rem;
+    text-align: left;
 }

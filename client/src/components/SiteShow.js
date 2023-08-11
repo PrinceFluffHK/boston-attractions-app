@@ -13,8 +13,27 @@ const SiteShow = (props) => {
         image: "",
         creatorUsername: "",
     });
-
     const [reviews, setReviews] = useState([])
+
+    const deleteReview = async (reviewId) => {
+        try {
+            const response = await fetch(`/api/v1/reviews/${reviewId}`, {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                },
+            })
+            if (!response.ok) {
+                const error = new Error(`${response.status} ${response.statusText}`)
+                throw error
+            }
+            const updatedReviews = reviews.filter(review => review.id !== reviewId);
+            setReviews(updatedReviews);
+        }
+        catch (error) {
+            console.error(`Error in Fetch: ${error.message}`);
+        }
+    }
     
     const currentUser = props.user;
     const siteId = props.match.params.id;
@@ -53,20 +72,21 @@ const SiteShow = (props) => {
     if (site.minimumAge > 0) {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
-
+    
     const reviewList = reviews.map(reviewObject => {
         return (
             <ReviewTile
                 key={reviewObject.id}
                 {...reviewObject}
                 user={props.user}
+                deleteReview={deleteReview}
                 setReviewHandler={setReviewHandler}
             />
         )
     })
 
     let showReviewForm;
-    if(currentUser) {
+    if (currentUser) {
         showReviewForm =
         <ReviewForm
             site={site}
@@ -83,7 +103,6 @@ const SiteShow = (props) => {
     if (site.yearEstablished === 0) {
         yearEstablished = ""
     }
-
     return (
         <div className="parchment">
             <h1>{site.name}</h1>
@@ -91,13 +110,13 @@ const SiteShow = (props) => {
                 <div className="container__col-md-5">
                     <img src={site.image} alt={site.description} className="image-border"/>
                     <h2>{yearEstablished}</h2>
-                    <h3>Address: {site.address}</h3>
-                    <h3>Setting: {site.setting}</h3>
-                    <h3>{displayAge}</h3>
+                    <h4>Address: {site.address}</h4>
+                    <h4>Setting: {site.setting}</h4>
+                    <h4>{displayAge}</h4>
                     <p>{site.description}</p>
                     <p className="small-gray">Contributed by: {site.creatorUsername}</p >
                 </div>
-                <div className="callout secondary container__col-md-6 align-right container__col-offset-1">
+                <div className="container__col-md-6 align-right container__col-offset-1">
                     {showReviewForm}
                     {reviewList}
                 </div>
@@ -105,5 +124,4 @@ const SiteShow = (props) => {
         </div>
     );
 };
-
 export default SiteShow;

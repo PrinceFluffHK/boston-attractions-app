@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import RatingOptions from "./RatingOptions.js";
 
 import translateServerErrors from "../services/translateServerErrors.js"
 
 
 const ReviewForm = (props) => {
-    
+
     const [newReview, setNewReview] = useState({
         textBody: "",
         rating: ""
     })
-    
     const [errors, setErrors] = useState({})
     const site = props.site
 
-    
+
     const addNewReview = async (formData) => {
         try {
             const response = await fetch(`/api/v1/sites/${site.id}/reviews`, {
@@ -49,14 +49,13 @@ const ReviewForm = (props) => {
             [event.currentTarget.name]: event.currentTarget.value
         })
     }
+
+
+
     
-
-
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (props.user) {
-            addNewReview(newReview)
-        }
+        addNewReview(newReview)
         clearForm()
     }
 
@@ -68,37 +67,33 @@ const ReviewForm = (props) => {
     }
 
     return (
-        <div className="callout primary">
-            <h2>
-                Review Form
-            </h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="textBody">
-                    Review:
-                    <input
-                        id="textBody"
-                        type="text"
-                        name="textBody"
-                        value={newReview.textBody}
-                        onChange={handleInputChange}
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="textBody">
+                <h3>
+                    Write a Review:
+                </h3>
+                <input
+                    id="textBody"
+                    type="text"
+                    name="textBody"
+                    value={newReview.textBody}
+                    onChange={handleInputChange}
                     />
-                </label>
-                <label htmlFor="rating">
+                <h3>
                     Rating:
-                    <input
-                        id="rating"
-                        type="text"
-                        name="rating"
-                        value={newReview.rating}
-                        onChange={handleInputChange}
+                </h3>
+                <div>
+                    <RatingOptions 
+                        setNewReview={setNewReview}
+                        newReview={newReview}
                     />
-                </label>
-                <div className="button-group">
-                    <input className="button" type="button" value="Clear Review" onClick={clearForm} />
-                    <input className="button" type="submit" value="Submit Review" />
                 </div>
-            </form>
-        </div>
+            </label>
+            <div className="button-group">
+                <input className="button" type="button" value="Clear Review" onClick={clearForm} />
+                <input className="button" type="submit" value="Submit Review" />
+            </div>
+        </form>
     )
 }
 
