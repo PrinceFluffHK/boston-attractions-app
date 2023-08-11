@@ -52,11 +52,10 @@ const ReviewForm = (props) => {
 
 
 
+    
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (props.user) {
-            addNewReview(newReview)
-        }
+        addNewReview(newReview)
         clearForm()
     }
 
@@ -75,20 +74,26 @@ const ReviewForm = (props) => {
 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
-                    Review:
+                    <h3>
+                        Write a Review:
+                    </h3>
                     <input
                         id="textBody"
                         type="text"
                         name="textBody"
                         value={newReview.textBody}
                         onChange={handleInputChange}
-                    />
-                    Rating:
+                        />
+                    <h3>
+                        Rating:
+                    </h3>
                     <div>
-                        <RatingOptions handleInputChange={handleInputChange} />
+                        <RatingOptions 
+                            setNewReview={setNewReview}
+                            newReview={newReview}
+                        />
                     </div>
                 </label>
-
                 <div className="button-group">
                     <input className="button" type="button" value="Clear Review" onClick={clearForm} />
                     <input className="button" type="submit" value="Submit Review" />
