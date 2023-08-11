@@ -22,7 +22,6 @@ h4 {
     font-weight: bold;
 }
 
-
 h1 {
     font-size: 7rem;
     text-align: center;
@@ -60,22 +59,14 @@ label {
     height: 200px;
     border-radius: 100px;
 }
-.rating-options {
-    font-size: 1rem;
-    font-weight: bolder;
-}
 
 #button {
     cursor: pointer;
 }
 
-.review-form {
-  background-color: #ADD8E6;
-}
-
 .radio-button {
-  font-family: "FontAwesome";
- list-style: "fa-star"
+    font-family: "FontAwesome";
+    list-style: "fa-star";
 }
 
 .align-right {
@@ -168,4 +159,4 @@ $map-grid-props: (
 .site-title {
     font-size: 4rem;
     text-align: left;
-} 
+}

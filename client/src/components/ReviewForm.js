@@ -67,35 +67,33 @@ const ReviewForm = (props) => {
     }
 
     return (
-        <div className="review-form">
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="textBody">
-                    <h3>
-                        Write a Review:
-                    </h3>
-                    <input
-                        id="textBody"
-                        type="text"
-                        name="textBody"
-                        value={newReview.textBody}
-                        onChange={handleInputChange}
-                        />
-                    <h3>
-                        Rating:
-                    </h3>
-                    <div>
-                        <RatingOptions 
-                            setNewReview={setNewReview}
-                            newReview={newReview}
-                        />
-                    </div>
-                </label>
-                <div className="button-group">
-                    <input className="button" type="button" value="Clear Review" onClick={clearForm} />
-                    <input className="button" type="submit" value="Submit Review" />
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="textBody">
+                <h3>
+                    Write a Review:
+                </h3>
+                <input
+                    id="textBody"
+                    type="text"
+                    name="textBody"
+                    value={newReview.textBody}
+                    onChange={handleInputChange}
+                    />
+                <h3>
+                    Rating:
+                </h3>
+                <div>
+                    <RatingOptions 
+                        setNewReview={setNewReview}
+                        newReview={newReview}
+                    />
                 </div>
-            </form>
-        </div>
+            </label>
+            <div className="button-group">
+                <input className="button" type="button" value="Clear Review" onClick={clearForm} />
+                <input className="button" type="submit" value="Submit Review" />
+            </div>
+        </form>
     )
 }
 
