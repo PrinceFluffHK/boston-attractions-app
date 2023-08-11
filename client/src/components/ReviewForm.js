@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"
 
 import translateServerErrors from "../services/translateServerErrors.js"
 
 
-const ReviewForm = (props, {currentUser}) => {
+const ReviewForm = (props) => {
     
     const [newReview, setNewReview] = useState({
         textBody: "",
@@ -35,9 +34,9 @@ const ReviewForm = (props, {currentUser}) => {
                 }
             } else {
                 const responseBody = await response.json()
-                const reviewData = site.reviews.concat(responseBody.newReview)
+                const reviewData = props.reviews.concat(responseBody.newReview)
                 setErrors({})
-                props.setSite({ ...site, reviews: reviewData })
+                props.setReviews(reviewData)
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -55,9 +54,10 @@ const ReviewForm = (props, {currentUser}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (currentUser) {
+        if (props.user) {
             addNewReview(newReview)
         }
+        clearForm()
     }
 
     const clearForm = () => {
@@ -69,9 +69,9 @@ const ReviewForm = (props, {currentUser}) => {
 
     return (
         <div className="callout primary">
-            <h1>
+            <h2>
                 Review Form
-            </h1>
+            </h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
                     Review:
@@ -94,10 +94,7 @@ const ReviewForm = (props, {currentUser}) => {
                     />
                 </label>
                 <div className="button-group">
-                    <Link to="/" className="button">
-                        Back To List
-                    </Link>
-                    <input className="button" type="button" value="Clear Review Form" onClick={clearForm} />
+                    <input className="button" type="button" value="Clear Review" onClick={clearForm} />
                     <input className="button" type="submit" value="Submit Review" />
                 </div>
             </form>

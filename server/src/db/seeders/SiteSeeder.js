@@ -13,6 +13,7 @@ class SiteSeeder {
         setting: "Outdoors",
         image: "https://express-file-uploading-part-2-production.s3.amazonaws.com/Boston%2BCommon.jpeg",
         minimumAge: 0,
+        yearEstablished: 1830,
         creatorId: garrett.id
       },
       {
@@ -28,6 +29,7 @@ class SiteSeeder {
         address: "19 North Square, Boston MA 02113",
         description: "Colonial house of American patriot and Founding Father Paul Revere during the time of the American Revolution.",
         setting: "Indoors",
+        yearEstablished: 1680,
         minimumAge: 13,
         image: "https://express-file-uploading-part-2-production.s3.amazonaws.com/dusty.jpeg",
         creatorId: matthew.id

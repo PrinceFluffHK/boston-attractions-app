@@ -8,27 +8,42 @@ const SiteShow = (props) => {
         address: "",
         description: "",
         setting: "",
+        yearEstablished: "",
         minimumAge: 0,
-        reviews: [],
         image: "",
         creatorUsername: "",
     });
 
+    const [reviews, setReviews] = useState([])
+    
     const currentUser = props.user;
-    const siteIdFromProps = props.match.params.id;
+    const siteId = props.match.params.id;
 
     const getSite = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/${siteIdFromProps}`);
+            const response = await fetch(`/api/v1/sites/${siteId}`);
             if (!response.ok) {
                 throw new Error(`${response.status} (${response.statusText})`);
             }
             const body = await response.json();
             setSite(body.site);
+            setReviews([])
+            setReviews(body.site.reviews)
         } catch (error) {
             console.error(`Error in Fetch: ${error.message}`);
         }
     };
+
+    const setReviewHandler = (targetId, value) => {
+        const modReviews = reviews.map((review) => {
+            if (review.id === targetId) {
+                review.netVoteValue = review.netVoteValue + value;
+                review.hasVoted = true
+            }
+            return review;
+        });
+        setReviews(modReviews);
+    }
 
     useEffect(() => {
         getSite();
@@ -39,36 +54,54 @@ const SiteShow = (props) => {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
 
-    const reviews = site.reviews.map((reviewObject) => {
-        return <ReviewTile key={reviewObject.id} {...reviewObject} />;
-    });
+    const reviewList = reviews.map(reviewObject => {
+        return (
+            <ReviewTile
+                key={reviewObject.id}
+                {...reviewObject}
+                user={props.user}
+                setReviewHandler={setReviewHandler}
+            />
+        )
+    })
 
     let showReviewForm;
     if(currentUser) {
         showReviewForm =
         <ReviewForm
             site={site}
-            currentUser={currentUser}
+            user={props.user}
             setSite={setSite}
+            setReviews={setReviews}
+            reviews={reviews}
         />
     } else {
-        showReviewForm = <h4>Please Sign Up, or Sign In, To Contribute A Review To {site.name}</h4>
+        showReviewForm = <h4>Please Sign Up or Sign In to contribute a review</h4>
+    }
+
+    let yearEstablished = `Est: ${site.yearEstablished}`
+    if (site.yearEstablished === 0) {
+        yearEstablished = ""
     }
 
     return (
-        <div className="callout">
+        <div className="parchment">
             <h1>{site.name}</h1>
-            <h3>{site.address}</h3>
-            <p>{site.description}</p>
-            <p>{site.setting}</p>
-            <p>{displayAge}</p>
-            <div className="callout secondary">
-                {" "}
-                Reviews:
-                {showReviewForm}
-                {reviews}
+            <div className="container__row">
+                <div className="container__col-md-5">
+                    <img src={site.image} alt={site.description} className="image-border"/>
+                    <h2>{yearEstablished}</h2>
+                    <h3>Address: {site.address}</h3>
+                    <h3>Setting: {site.setting}</h3>
+                    <h3>{displayAge}</h3>
+                    <p>{site.description}</p>
+                    <p className="small-gray">Contributed by: {site.creatorUsername}</p >
+                </div>
+                <div className="callout secondary container__col-md-6 align-right container__col-offset-1">
+                    {showReviewForm}
+                    {reviewList}
+                </div>
             </div>
-            <h6>Contributed by: {site.creatorUsername}</h6>
         </div>
     );
 };
