@@ -54,17 +54,15 @@ label {
 }
 
 .imageCircle {
+    object-fit: cover;
+    // display: block;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
+    border-radius: 65%;
 }
 .rating-options {
     font-size: 1rem;
     font-weight: bolder;
-}
-
-.review-form {
-    background-color: #add8e6;
 }
 
 #button {
@@ -118,7 +116,8 @@ $map-grid-props: (
     }
 }
 .container {
-    max-width: $grid__bp-md * 1px;
+    // max-width: $grid__bp-md * 1px;
+    max-width: 45%;
     margin: 0 auto;
     &--fluid {
         margin: 0;
@@ -157,3 +156,13 @@ $map-grid-props: (
 .full-span {
     width: 100%;
 }
+
+.review-tile {
+    background-color: #add8e6;
+    color: #add8e6;
+}
+
+.site-title {
+    font-size: 4rem;
+    text-align: left;
+} 

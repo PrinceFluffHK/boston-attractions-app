@@ -63,7 +63,7 @@ const ReviewForm = (props) => {
     }
 
     return (
-        <div className="callout review-form">
+        <div className="callout primary review-form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
                     <h3>

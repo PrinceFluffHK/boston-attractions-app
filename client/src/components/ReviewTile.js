@@ -58,7 +58,7 @@ const ReviewTile = ({
     }
 
     return (
-        <div className="callout secondary container">
+        <div className="callout primary container review-tile">
             <div className="container__row">
                 <p className="container__col-md-6">{showRating(rating)}</p>
                 <div className="container__col-md-6" >
