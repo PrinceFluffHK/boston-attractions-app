@@ -1,7 +1,7 @@
 import React from "react"
 import VoteButtons from "./VoteButtons.js";
 
-const ReviewTile = ({
+const ReviewTile = (props,{
     textBody,
     rating,
     id,
@@ -10,6 +10,7 @@ const ReviewTile = ({
     hasVoted,
     creatorName,
     setReviewHandler }) => {
+        console.log(props)
 
     const addVote = async (value) => {
         try {
@@ -45,16 +46,16 @@ const ReviewTile = ({
         }
     };
     // delete stuff
-    const currentUser = user
-    const handleDeleteClick = (event) => {
-        event.preventDefault()
-        if (window.confirm("Are you sure you want to delete this review?")) {
-            props.deleteReview(props.id)
-        }
-    }
-    const deleteButton = currentUser && currentUser.id === props.userId ? (
-        <input type="button" value="Delete" onClick={handleDeleteClick} />
-    ) : null;
+    // const currentUser = user
+    // const handleDeleteClick = (event) => {
+    //     event.preventDefault()
+    //     if (window.confirm("Are you sure you want to delete this review?")) {
+    //         props.deleteReview(props.id)
+    //     }
+    // }
+    // const deleteButton = currentUser && currentUser.id === props.userId ? (
+    //     <input type="button" value="Delete" onClick={handleDeleteClick} />
+    // ) : null;
 
     //-----------------------------------------------------
 
@@ -94,7 +95,7 @@ const ReviewTile = ({
             <div className="container__row small-gray">
                 <p>Review by {creatorName}</p>
             </div>
-            {deleteButton}
+            {/* {deleteButton} */}
         </div>
     )
 }
