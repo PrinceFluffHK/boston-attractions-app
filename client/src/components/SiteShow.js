@@ -16,43 +16,12 @@ const SiteShow = (props) => {
 
     const [reviews, setReviews] = useState([])
 
-    
-
-    // define your DELETE review fetch function up here, and then pass down to each review tile
-
-    const deleteReview = async (reviewId) => {
-        // DELETE FETCH
-        try {
-            const response = await fetch (`api/vi/reviews/${props.reviewId}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-                body: JSON.stringify(reviewId),
-        })
-        if (!response.ok) {
-            const error = new Error(`${response.status} ${response.statusText}`)
-            throw error
-        }
-        const responseBody = await response.json()
-        if(responseBody.delete) {
-            window.location.reload()
-        } else if(responseBody.error[0]){
-            console.error(`Error in Fetch: ${error.message}`);
-        }
-        }
-        catch(error) {
-            console.error(`Error in Fetch: ${error.message}`);
-        }
-    }
-
     const currentUser = props.user;
     const siteId = props.match.params.id;
 
     const getSite = async () => {
         try {
-            const response = await fetch(`/api/v1/sites/${siteIdFromProps}`);
+            const response = await fetch(`/api/v1/sites/${siteId}`);
             if (!response.ok) {
                 throw new Error(`${response.status} (${response.statusText})`);
             }

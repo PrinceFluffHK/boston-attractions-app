@@ -86,84 +86,102 @@ const SiteForm = (props) => {
     };
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <h2>Add New Historic Site</h2>
-                <ErrorList errors={errors} />
-                <label htmlFor="name">
-                    Site Name
-                    <input
-                        id="name"
-                        type="text"
-                        name="name"
-                        onChange={handleChange}
-                        value={siteRecord.name}
-                    />
-                </label>
-                <label htmlFor="yearEstablished">
-                    Year Established
-                    <input
-                        id="yearEstablished"
-                        type="text"
-                        name="yearEstablished"
-                        onChange={handleChange}
-                        value={siteRecord.yearEstablished}
-                    />
-                </label>
-                <label htmlFor="address">
-                    Site Address
-                    <input
-                        id="address"
-                        type="text"
-                        name="address"
-                        onChange={handleChange}
-                        value={siteRecord.address}
-                    />
-                </label>
-                <label htmlFor="description">
-                    Site Description
-                    <input
-                        id="description"
-                        type="text"
-                        name="description"
-                        onChange={handleChange}
-                        value={siteRecord.description}
-                    />
-                </label>
-                <label htmlFor="setting">
-                    Select Setting
-                    <select
-                        id="setting"
-                        name="setting"
-                        onChange={handleChange}
-                        value={siteRecord.setting}
-                    >
-                        {settingOptions}
-                    </select>
-                </label>
-                <label htmlFor="minimumAge">
-                    Minimum Age (optional)
-                    <input
-                        id="minimumAge"
-                        type="integer"
-                        name="minimumAge"
-                        onChange={handleChange}
-                        value={siteRecord.minimumAge}
-                    />
-                </label>
-                <Dropzone onDrop={handleSiteImageUpload}>
-                    {({ getRootProps, getInputProps }) => (
-                        <section>
-                            <div {...getRootProps()}>
-                                <input {...getInputProps()} />
-                                <p className="button">Upload a Relevant Picture (optional)</p>
-                            </div>
-                        </section>
-                    )}
-                </Dropzone>
-                <input type="submit" value="Add Site" />
-            </form>
-        </>
+        <div className="parchment ">
+            <div className="container">
+                <div className="container__row">
+                    <div>
+                        <form onSubmit={handleSubmit}>
+                            <h2>Add New Historic Site</h2>
+                            <ErrorList errors={errors} />
+                            <label htmlFor="name">
+                                <h4>
+                                    Site Name
+                                </h4>
+                                <input
+                                    id="name"
+                                    type="text"
+                                    name="name"
+                                    onChange={handleChange}
+                                    value={siteRecord.name}
+                                />
+                            </label>
+                            <label htmlFor="yearEstablished">
+                                <h4>
+                                    Year Established
+                                </h4>
+                                <input
+                                    id="yearEstablished"
+                                    type="text"
+                                    name="yearEstablished"
+                                    onChange={handleChange}
+                                    value={siteRecord.yearEstablished}
+                                />
+                            </label>
+                            <label htmlFor="address">
+                                <h4>
+                                    Site Address
+                                </h4>
+                                <input
+                                    id="address"
+                                    type="text"
+                                    name="address"
+                                    onChange={handleChange}
+                                    value={siteRecord.address}
+                                />
+                            </label>
+                            <label htmlFor="description">
+                                <h4>
+                                    Site Description
+                                </h4>
+                                <input
+                                    id="description"
+                                    type="text"
+                                    name="description"
+                                    onChange={handleChange}
+                                    value={siteRecord.description}
+                                />
+                            </label>
+                            <label htmlFor="setting">
+                                <h4>
+                                    Select Setting
+                                </h4>
+                                <select
+                                    id="setting"
+                                    name="setting"
+                                    onChange={handleChange}
+                                    value={siteRecord.setting}
+                                >
+                                    {settingOptions}
+                                </select>
+                            </label>
+                            <label htmlFor="minimumAge">
+                                <h4>
+                                    Minimum Age (optional)
+                                </h4>
+                                <input
+                                    id="minimumAge"
+                                    type="integer"
+                                    name="minimumAge"
+                                    onChange={handleChange}
+                                    value={siteRecord.minimumAge}
+                                />
+                            </label>
+                            <Dropzone onDrop={handleSiteImageUpload}>
+                                {({ getRootProps, getInputProps }) => (
+                                    <section>
+                                        <div {...getRootProps()}>
+                                            <input {...getInputProps()} />
+                                            <p className="button">Add Picture (optional)</p>
+                                        </div>
+                                    </section>
+                                )}
+                            </Dropzone>
+                            <input type="submit" value="Add Site" className="button" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 
