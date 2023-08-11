@@ -47,7 +47,10 @@ const SiteList = (props) => {
                     <h4>Add New Historic Site</h4>
                 </Link>
             </div>
-            <ul>{sitesToRender}</ul>
+            <div className="container">
+                <div>{sitesToRender}</div>
+
+            </div>
         </div>
     );
 };

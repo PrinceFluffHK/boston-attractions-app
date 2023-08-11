@@ -13,7 +13,7 @@ const ReviewTile = ({
 }) => {
     const addVote = async (value) => {
         try {
-            const response = await fetch(`/api/v1/reviews/${id}`, {
+            const response = await fetch(`/api/v1/votes/${id}`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",

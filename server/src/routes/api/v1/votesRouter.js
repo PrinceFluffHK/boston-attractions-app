@@ -2,9 +2,9 @@ import express from "express";
 import { Vote } from "../../../models/index.js";
 import { ValidationError } from "objection";
 
-const reviewsRouter = new express.Router()
+const votesRouter = new express.Router()
 
-reviewsRouter.post("/:id", async (req, res) => {
+votesRouter.post("/:id", async (req, res) => {
     const { body, user } = req
     const formInput = {
         voteValue: body.value,
@@ -22,4 +22,4 @@ reviewsRouter.post("/:id", async (req, res) => {
     }
 })
 
-export default reviewsRouter
+export default votesRouter
