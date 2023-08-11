@@ -56,10 +56,9 @@ label {
 
 .imageCircle {
     object-fit: cover;
-    // display: block;
     width: 200px;
     height: 200px;
-    border-radius: 65%;
+    border-radius: 100px;
 }
 .rating-options {
     font-size: 1rem;
@@ -154,13 +153,10 @@ $map-grid-props: (
     width: 10px;
 }
 
-.full-span {
-    width: 100%;
-}
-
 .review-tile {
     background-color: #add8e6;
     color: #add8e6;
+    max-width: 100%;
 }
 
 .site-title {
