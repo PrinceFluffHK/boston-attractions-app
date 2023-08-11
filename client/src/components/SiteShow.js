@@ -13,9 +13,28 @@ const SiteShow = (props) => {
         image: "",
         creatorUsername: "",
     });
-
     const [reviews, setReviews] = useState([])
 
+    const deleteReview = async (reviewId) => {
+        try {
+            const response = await fetch(`/api/v1/reviews/${reviewId}`, {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                },
+            })
+            if (!response.ok) {
+                const error = new Error(`${response.status} ${response.statusText}`)
+                throw error
+            }
+            const updatedReviews = reviews.filter(review => review.id !== reviewId);
+            setReviews(updatedReviews);
+        }
+        catch (error) {
+            console.error(`Error in Fetch: ${error.message}`);
+        }
+    }
+    
     const currentUser = props.user;
     const siteId = props.match.params.id;
 
@@ -53,20 +72,21 @@ const SiteShow = (props) => {
     if (site.minimumAge > 0) {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
-
+    
     const reviewList = reviews.map(reviewObject => {
         return (
             <ReviewTile
                 key={reviewObject.id}
                 {...reviewObject}
                 user={props.user}
+                deleteReview={deleteReview}
                 setReviewHandler={setReviewHandler}
             />
         )
     })
 
     let showReviewForm;
-    if(currentUser) {
+    if (currentUser) {
         showReviewForm =
         <ReviewForm
             site={site}
@@ -83,7 +103,6 @@ const SiteShow = (props) => {
     if (site.yearEstablished === 0) {
         yearEstablished = ""
     }
-
     return (
         <div className="parchment">
             <h1>{site.name}</h1>
@@ -105,5 +124,4 @@ const SiteShow = (props) => {
         </div>
     );
 };
-
 export default SiteShow;

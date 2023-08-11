@@ -3,15 +3,16 @@ import RatingOptions from "./RatingOptions.js";
 
 import translateServerErrors from "../services/translateServerErrors.js"
 
+
 const ReviewForm = (props) => {
-    
+
     const [newReview, setNewReview] = useState({
         textBody: "",
         rating: ""
     })
-    
     const [errors, setErrors] = useState({})
     const site = props.site
+
 
     const addNewReview = async (formData) => {
         try {
@@ -48,6 +49,9 @@ const ReviewForm = (props) => {
             [event.currentTarget.name]: event.currentTarget.value
         })
     }
+
+
+
     
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -69,13 +73,12 @@ const ReviewForm = (props) => {
                     <h3>
                         Write a Review:
                     </h3>
-                    <textarea
+                    <input
                         id="textBody"
                         type="text"
                         name="textBody"
                         value={newReview.textBody}
                         onChange={handleInputChange}
-                        rows={5}
                         />
                     <h3>
                         Rating:
