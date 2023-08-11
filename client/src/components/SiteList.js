@@ -30,21 +30,28 @@ const SiteList = (props) => {
                 key={site.id}
                 id={site.id}
                 name={site.name}
+                address={site.address}
+                description={site.description}
                 setting={site.setting}
                 minimumAge={site.minimumAge}
+                yearEstablished={site.yearEstablished}
                 image={site.image}
             />
         );
     });
-
     return (
-        <>
+        <div className="parchment">
             <h1>Welcome to Boston!</h1>
-            <Link to="/new-site">
-                <h4>Add New Historic Site</h4>
-            </Link>
-            <ul>{sitesToRender}</ul>
-        </>
+            <div>
+                <Link to="/new-site" className="button">
+                    <h4>Add New Historic Site</h4>
+                </Link>
+            </div>
+            <div className="container">
+                <div>{sitesToRender}</div>
+
+            </div>
+        </div>
     );
 };
 

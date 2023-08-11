@@ -5,16 +5,63 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 :root {
-  -moz-tab-size: 4;
-  tab-size: 4;
+    -moz-tab-size: 4;
+    tab-size: 4;
+
+}
+
+h1,
+h2,
+h3,
+h4 {
+    text-align: left;
+    font-family: "Papyrus";
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 7rem;
+    text-align: center;
+}
+
+p,
+label {
+    text-align: left;
+    font-family: "Papyrus";
+    font-weight: bold;
+}
+
+.pClass {
+    text-align: end;
+    font-family: "Papyrus";
+}
+
+.parchment {
+    position: absolute;
+    width: 98%;
+    min-height: calc((1vw + 1vh) * 75);
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: 4em 0;
+    padding: 4em;
+    box-shadow: 4px 3px 20px black, 0 0 60px #8a4d0f inset;
+    background: #fffef0;
+    filter: url(#wavy2);
+}
+
+.imageCircle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
 }
 
 #button {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .review-form {
@@ -25,7 +72,94 @@
 color: green;
 }
 
-.radio-button{
+.radio-button {
   font-family: "FontAwesome";
  list-style: "fa-star"
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.image-border {
+    border: black 10px solid;
+    margin: 3rem;
+    justify-content: left;
+}
+
+$grid__bp-sm: 576;
+$grid__bp-md: 768;
+$grid__bp-lg: 992;
+$grid__bp-xl: 1200;
+$grid__cols: 12;
+$map-grid-props: (
+    "": 0,
+    "-sm": $grid__bp-sm,
+    "-md": $grid__bp-md,
+    "-lg": $grid__bp-lg,
+    "-xl": $grid__bp-xl,
+);
+@mixin create-mq($breakpoint) {
+    @if ($breakpoint == 0) {
+        @content;
+    }
+}
+@mixin create-col-classes($modifier, $grid-cols, $breakpoint) {
+    @include create-mq($breakpoint) {
+        &__col#{$modifier}-offset-0 {
+            margin-left: 0;
+        }
+        @for $i from 1 through $grid-cols {
+            &__col#{$modifier}-#{$i} {
+                flex-basis: (100 / ($grid-cols / $i)) * 1%;
+            }
+            &__col#{$modifier}-offset-#{$i} {
+                margin-left: (100 / ($grid-cols / $i)) * 1%;
+            }
+        }
+    }
+}
+.container {
+    max-width: $grid__bp-md * 1px;
+    margin: 0 auto;
+    &--fluid {
+        margin: 0;
+        max-width: 100%;
+    }
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    @for $i from 1 through $grid__cols {
+        &__col-sm-#{$i} {
+            flex-basis: (100 / ($grid__cols / $i)) * 1%;
+        }
+    }
+    @for $i from 1 through $grid__cols {
+        &__col-md-#{$i} {
+            flex-basis: (100 / ($grid__cols / $i)) * 1%;
+        }
+    }
+    @each $modifier, $breakpoint in $map-grid-props {
+        @include create-col-classes($modifier, $grid__cols, $breakpoint);
+    }
+}
+
+.small-gray {
+    color: gray;
+    font-size: smaller;
+}
+
+.contained-icon {
+    height: auto;
+    width: 10px;
+}
+
+.full-span {
+    width: 100%;
 }

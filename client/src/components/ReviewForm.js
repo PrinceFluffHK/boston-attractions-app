@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom"
 import RatingOptions from "./RatingOptions.js";
+=======
+>>>>>>> 4e7934e26103e3c17a63ecf107f1623deea5b204
 
 import translateServerErrors from "../services/translateServerErrors.js"
 
 
-const ReviewForm = (props, {currentUser}) => {
+const ReviewForm = (props) => {
     
     const [newReview, setNewReview] = useState({
         textBody: "",
@@ -36,9 +39,9 @@ const ReviewForm = (props, {currentUser}) => {
                 }
             } else {
                 const responseBody = await response.json()
-                const reviewData = site.reviews.concat(responseBody.newReview)
+                const reviewData = props.reviews.concat(responseBody.newReview)
                 setErrors({})
-                props.setSite({ ...site, reviews: reviewData })
+                props.setReviews(reviewData)
             }
         } catch (error) {
             console.error(`Error in fetch: ${error.message}`)
@@ -56,9 +59,10 @@ const ReviewForm = (props, {currentUser}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (currentUser) {
+        if (props.user) {
             addNewReview(newReview)
         }
+        clearForm()
     }
 
     const clearForm = () => {
@@ -69,11 +73,18 @@ const ReviewForm = (props, {currentUser}) => {
     }
 
     return (
+<<<<<<< HEAD
         <div className="callout review-form">
             <h1>
                 Review Form
             </h1>
             
+=======
+        <div className="callout primary">
+            <h2>
+                Review Form
+            </h2>
+>>>>>>> 4e7934e26103e3c17a63ecf107f1623deea5b204
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
                     Review:
@@ -91,10 +102,7 @@ const ReviewForm = (props, {currentUser}) => {
                 </label>
 
                 <div className="button-group">
-                    <Link to="/" className="button">
-                        Back To List
-                    </Link>
-                    <input className="button" type="button" value="Clear Review Form" onClick={clearForm} />
+                    <input className="button" type="button" value="Clear Review" onClick={clearForm} />
                     <input className="button" type="submit" value="Submit Review" />
                 </div>
             </form>

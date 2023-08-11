@@ -44,7 +44,7 @@ sitesRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const site = await Site.query().findById(id);
-        const serializedSite = await SiteSerializer.getInfo(site)
+        const serializedSite = await SiteSerializer.getInfo(site, req.user)
         return res.status(200).json({ site: serializedSite });
     } catch (error) {
         return res.status(500).json({ errors: error });

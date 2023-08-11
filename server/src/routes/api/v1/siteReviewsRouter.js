@@ -13,6 +13,8 @@ siteReviewsRouter.post("/", async (req, res) => {
     formData.userId = req.user.id
     try {
         const newReview = await Review.query().insertAndFetch(formData)
+        newReview.hasVoted = false
+        newReview.netVoteValue = 0
         return res.status(201).json({ newReview })
     } catch (error) {
         if (error instanceof ValidationError) {

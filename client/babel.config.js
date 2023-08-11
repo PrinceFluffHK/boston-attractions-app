@@ -60,6 +60,7 @@ module.exports = function (api) {
           async: false,
         },
       ],
+      ['macros'],
     ].filter(Boolean),
   };
 };
