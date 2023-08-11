@@ -10,7 +10,7 @@ const ReviewTile = ({
     hasVoted,
     creatorName,
     setReviewHandler }) => {
-        
+
     const addVote = async (value) => {
         try {
             const response = await fetch(`/api/v1/votes/${id}`, {
@@ -45,7 +45,7 @@ const ReviewTile = ({
         }
     };
     // delete stuff
-    const currentUser = props.currentUser
+    const currentUser = user
     const handleDeleteClick = (event) => {
         event.preventDefault()
         if (window.confirm("Are you sure you want to delete this review?")) {
