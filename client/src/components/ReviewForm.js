@@ -1,24 +1,19 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-import { Link } from "react-router-dom"
 import RatingOptions from "./RatingOptions.js";
-=======
->>>>>>> 4e7934e26103e3c17a63ecf107f1623deea5b204
 
 import translateServerErrors from "../services/translateServerErrors.js"
 
 
 const ReviewForm = (props) => {
-    
+
     const [newReview, setNewReview] = useState({
         textBody: "",
         rating: ""
     })
-    
     const [errors, setErrors] = useState({})
     const site = props.site
 
-    
+
     const addNewReview = async (formData) => {
         try {
             const response = await fetch(`/api/v1/sites/${site.id}/reviews`, {
@@ -54,7 +49,7 @@ const ReviewForm = (props) => {
             [event.currentTarget.name]: event.currentTarget.value
         })
     }
-    
+
 
 
     const handleSubmit = (event) => {
@@ -73,18 +68,11 @@ const ReviewForm = (props) => {
     }
 
     return (
-<<<<<<< HEAD
         <div className="callout review-form">
             <h1>
                 Review Form
             </h1>
-            
-=======
-        <div className="callout primary">
-            <h2>
-                Review Form
-            </h2>
->>>>>>> 4e7934e26103e3c17a63ecf107f1623deea5b204
+
             <form onSubmit={handleSubmit}>
                 <label htmlFor="textBody">
                     Review:
@@ -97,7 +85,7 @@ const ReviewForm = (props) => {
                     />
                     Rating:
                     <div>
-                          <RatingOptions  handleInputChange={handleInputChange}/>
+                        <RatingOptions handleInputChange={handleInputChange} />
                     </div>
                 </label>
 
