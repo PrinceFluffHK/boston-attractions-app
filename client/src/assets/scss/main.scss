@@ -129,3 +129,9 @@ $map-grid-props: (
     color: gray;
     font-size: smaller;
 }
+
+.contained-icon {
+    // object-fit: contain;
+    height: auto;
+    width: 10px;
+}

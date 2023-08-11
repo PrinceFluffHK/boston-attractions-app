@@ -6,32 +6,12 @@ const VoteButtons = ({ user, hasVoted, handleDownVote, handleUpVote, netVoteValu
         plusMinus = "+"
     }
 
-    const UpVote = () => {
-        let className = "container__col-md-4"
-        if(hasVoted) {
-            className.concat(" voteGreen")
-        }
-        return(
-            <button type="text" onClick={handleUpVote} className={className}>UpVote</button>
-        ) 
-    }
-
-    const DownVote = () => {
-        let className = "container__col-md-4"
-        if(hasVoted) {
-            className.concat(" voteRed")
-        }
-        return(
-            <button type="text" onClick={handleDownVote} className={className}>DownVote</button>
-        ) 
-    }
-
     if (user) {
         return(
             <div className="container__row">
-                <UpVote />
+                <button type="text" onClick={handleUpVote} className="container__col-md-4">UpVote</button>
                 <h3 className="container__col-md-3 align-center">{plusMinus}{netVoteValue}</h3>
-                <DownVote />
+                <button type="text" onClick={handleDownVote} className="container__col-md-4">DownVote</button>
             </div>
         )
     } else {

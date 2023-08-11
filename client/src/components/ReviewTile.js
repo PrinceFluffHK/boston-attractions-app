@@ -44,10 +44,6 @@ const ReviewTile = ({
             addVote(-1);
         }
     };
-    // let plusMinus = ""
-    // if(netVoteValue > 0) {
-    //     plusMinus = "+"
-    // }
 
     return (
         <div className="callout secondary container">
