@@ -1,29 +1,15 @@
-import React, {useState} from "react"
-// const props = { textBody, rating, userId }
+import React, { useState } from "react"
 const ReviewTile = (props) => {
-    // const [deleteReview, setDeleteReview] = useState({})
-
-    // const handleEditClick = () => {
-
-    // }
     const handleDeleteClick = (event) => {
         event.preventDefault()
-        if(window.confirm("Are you sure you want to delete this review?")){
+        if (window.confirm("Are you sure you want to delete this review?")) {
             props.deleteReview(props.id)
         }
     }
-
-    
-    
-            //  make a DELETE fetch to the backend on a new endpoint to delete the review from the database 
-            
-                //  after you get a response back, then you need to delete the review from reviews state (which is way up in SiteShow)
-                    // nick recommends using the .filter method to remove the review from reviews state
-
-
-
-        
-    
+    const currentUser = props.currentUser
+    const deleteButton = currentUser && currentUser.id === props.userId ? (
+        <input type="button" value="Delete" onClick={handleDeleteClick} />
+    ) : null;
 
     return (
         <div className="callout secondary">
@@ -33,11 +19,8 @@ const ReviewTile = (props) => {
             <p>
                 {props.textBody}
             </p>
-            {/* <p>-{username}</p> */}
-            {/* <input type="button" value="Edit" onClick={handleEditClick}/> */}
-            <input type="button" value="Delete" onClick={handleDeleteClick}/>
+            {deleteButton}
         </div>
     )
 }
-
 export default ReviewTile

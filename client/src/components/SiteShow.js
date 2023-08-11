@@ -12,34 +12,26 @@ const SiteShow = (props) => {
         image: "",
         creatorUsername: "",
     });
-
     const [reviews, setReviews] = useState([])
-
-    
-
-    // define your DELETE review fetch function up here, and then pass down to each review tile
-
     const deleteReview = async (reviewId) => {
-        // DELETE FETCH
         try {
-            const response = await fetch (`/api/v1/reviews/${reviewId}`, {
+            const response = await fetch(`/api/v1/reviews/${reviewId}`, {
                 method: "DELETE",
                 headers: {
                     Accept: "application/json",
                 },
-        })
-        if (!response.ok) {
-            const error = new Error(`${response.status} ${response.statusText}`)
-            throw error
-        }
-        const updatedReviews = reviews.filter(review => review.id !== reviewId);
+            })
+            if (!response.ok) {
+                const error = new Error(`${response.status} ${response.statusText}`)
+                throw error
+            }
+            const updatedReviews = reviews.filter(review => review.id !== reviewId);
             setReviews(updatedReviews);
         }
-        catch(error) {
+        catch (error) {
             console.error(`Error in Fetch: ${error.message}`);
         }
     }
-
     const currentUser = props.user;
     const siteIdFromProps = props.match.params.id;
 
@@ -56,7 +48,6 @@ const SiteShow = (props) => {
             console.error(`Error in Fetch: ${error.message}`);
         }
     };
-
     useEffect(() => {
         getSite();
     }, []);
@@ -65,23 +56,20 @@ const SiteShow = (props) => {
     if (site.minimumAge > 0) {
         displayAge = `Open to visitors aged ${site.minimumAge}+`;
     }
-
     const reviewTiles = reviews.map((reviewObject) => {
-        return <ReviewTile key={reviewObject.id} {...reviewObject} deleteReview={deleteReview} user={props.user}/>;
+        return <ReviewTile key={reviewObject.id} {...reviewObject} deleteReview={deleteReview} user={props.user} />;
     });
-
     let showReviewForm;
-    if(currentUser) {
+    if (currentUser) {
         showReviewForm =
-        <ReviewForm
-            site={site}
-            currentUser={currentUser}
-            setSite={setSite}
-        />
+            <ReviewForm
+                site={site}
+                currentUser={currentUser}
+                setSite={setSite}
+            />
     } else {
         showReviewForm = <h4>Please Sign Up, or Sign In, To Contribute A Review To {site.name}</h4>
     }
-
     return (
         <div className="callout">
             <h1>{site.name}</h1>
@@ -99,5 +87,4 @@ const SiteShow = (props) => {
         </div>
     );
 };
-
 export default SiteShow;
